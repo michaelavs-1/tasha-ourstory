@@ -1,1067 +1,1399 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OUR STORY — семейная книга воспоминаний | Таша Карлюка</title>
-  <meta name="description" content="Я превращаю воспоминания вашей семьи в живую, тёплую книгу. Журналист, писатель, сценарист Таша Карлюка. Стоимость — 3000€." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="Превращаю воспоминания вашей семьи в живую книгу. Журналист, писатель, сценарист — Таша Карлюка."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #FAF7F2;
-      --warm-white: #F5EFE6;
-      --parchment: #EDE3D4;
-      --text: #1C1511;
-      --text-muted: #6B5C4E;
-      --accent: #B8846A;
-      --accent-dark: #9A6A52;
-      --accent-light: #D4A98A;
-      --border: #DDD0C0;
-      --dark: #0F0C09;
+      --ink:       #110E0B;
+      --ink-soft:  #3A3028;
+      --muted:     #7A6A5A;
+      --cream:     #FAF7F2;
+      --warm:      #F2EAE0;
+      --parchment: #E8DDD0;
+      --gold:      #C4956A;
+      --gold-light:#D9AE89;
+      --gold-dim:  #9A6A4A;
+      --border:    #DDD0C0;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--cream);
-      color: var(--text);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─── */
+    /* ════════════════════════════════════
+       NAV
+    ════════════════════════════════════ */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      height: 68px;
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      padding: 0 6%;
+      height: 70px;
+      transition: background 0.4s, box-shadow 0.4s;
     }
-    nav.scrolled {
-      border-bottom-color: var(--border);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    nav.solid {
+      background: rgba(250,247,242,0.96);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
     }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--text);
+      color: #fff;
       text-decoration: none;
+      transition: color 0.4s;
     }
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
+    nav.solid .nav-logo { color: var(--ink); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav.solid .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--gold-light) !important; }
+
+    .nav-cta {
+      border: 1px solid rgba(255,255,255,0.5) !important;
+      color: #fff !important;
+      padding: 8px 22px;
+      border-radius: 1px;
+      transition: all 0.3s !important;
+    }
+    nav.solid .nav-cta {
+      border-color: var(--gold) !important;
+      color: var(--gold) !important;
+    }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.15) !important;
+    }
+    nav.solid .nav-cta:hover {
+      background: var(--gold) !important;
+      color: #fff !important;
+    }
+
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .burger span { display: block; width: 24px; height: 1px; background: #fff; transition: background 0.4s; }
+    nav.solid .burger span { background: var(--ink); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 190;
+      background: var(--ink);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300;
+      color: var(--cream); text-decoration: none;
+      letter-spacing: 0.05em;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      background: var(--accent);
-      color: #fff !important;
-      padding: 8px 20px;
-      border-radius: 2px;
-      font-weight: 500 !important;
-      letter-spacing: 0.08em !important;
-      transition: background 0.2s !important;
+    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-close {
+      position: absolute; top: 22px; right: 6%;
+      font-size: 2rem; color: var(--cream);
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-weight: 300;
     }
-    .nav-cta:hover { background: var(--accent-dark) !important; color: #fff !important; }
-    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .burger span { display: block; width: 24px; height: 1.5px; background: var(--text); transition: all 0.3s; }
 
-    /* ─── HERO ─── */
+    /* ════════════════════════════════════
+       HERO  — CINEMATIC FULL SCREEN
+    ════════════════════════════════════ */
     #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
       position: relative;
+      height: 100vh; min-height: 680px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
       overflow: hidden;
-      padding: 120px 5% 80px;
     }
+
     .hero-bg {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 50%, var(--parchment) 100%);
+      background-image:
+        url('https://tasha.wasmer.app/assets/hero-typewriter-closeup.jpg');
+      background-size: cover;
+      background-position: center 20%;
+      transform: scale(1.08);
+      transition: transform 8s ease-out;
     }
-    .hero-ornament {
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 45%;
-      background: var(--parchment);
-      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-      opacity: 0.5;
-    }
-    .hero-image-wrap {
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 44%;
-      overflow: hidden;
-    }
-    .hero-image-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: sepia(15%) contrast(1.05);
-    }
-    .hero-image-overlay {
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--cream) 0%, transparent 25%);
+      background: linear-gradient(
+        to bottom,
+        rgba(10,7,5,0.55) 0%,
+        rgba(10,7,5,0.45) 50%,
+        rgba(10,7,5,0.70) 100%
+      );
     }
+
+    .hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
     .hero-content {
       position: relative; z-index: 2;
-      max-width: 560px;
+      padding: 0 5%;
+      max-width: 900px;
     }
+
     .hero-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 1.5rem;
+      color: var(--gold-light);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
     }
+
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-size: clamp(3.4rem, 7.5vw, 7.5rem);
       font-weight: 300;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 1.5rem;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .line-inner {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp 1s cubic-bezier(0.16,1,0.3,1) forwards;
     }
-    .hero-subtitle {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
+    .hero-title .line:nth-child(1) .line-inner { animation-delay: 0.5s; }
+    .hero-title .line:nth-child(2) .line-inner { animation-delay: 0.7s; }
+    .hero-title .line:nth-child(3) .line-inner { animation-delay: 0.9s; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.72);
+      max-width: 520px;
+      margin: 0 auto 3rem;
       font-weight: 300;
-      max-width: 460px;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
     }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent);
+
+    .hero-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.4s forwards;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--gold);
       color: #fff;
-      padding: 15px 34px;
-      font-size: 0.8rem;
+      padding: 16px 38px;
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.25s, transform 0.2s;
+      border-radius: 1px;
+      transition: background 0.3s, transform 0.2s;
     }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 15px 34px;
-      font-size: 0.8rem;
+    .btn-hero-primary:hover { background: var(--gold-dim); transform: translateY(-2px); }
+
+    .btn-hero-secondary {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.88);
+      padding: 16px 38px;
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.25s;
+      border-radius: 1px;
+      transition: all 0.3s;
       background: transparent;
     }
-    .btn-secondary:hover { background: var(--accent); color: #fff; }
-    .hero-trust {
-      margin-top: 3.5rem;
-      display: flex; gap: 2.5rem; align-items: center;
-      font-size: 0.78rem; color: var(--text-muted);
+    .btn-hero-secondary:hover {
+      border-color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
     }
-    .hero-trust-item { display: flex; align-items: center; gap: 8px; }
-    .hero-trust-icon { font-size: 1.1rem; }
 
-    /* ─── SECTION STRUCTURE ─── */
-    section { padding: 100px 5%; }
-    .section-eyebrow {
-      font-size: 0.7rem;
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s ease 2s forwards;
+      cursor: pointer;
+    }
+    .hero-scroll span {
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.45);
     }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 1.2rem;
-    }
-    .section-title em { font-style: italic; color: var(--accent); }
-    .section-lead {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--text-muted);
-      max-width: 580px;
-      font-weight: 300;
-    }
-    .divider {
-      width: 48px;
-      height: 1px;
-      background: var(--accent);
-      margin: 1.5rem 0;
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
     }
 
-    /* ─── WHY / EMOTION ─── */
-    #why {
-      background: var(--dark);
-      color: var(--cream);
-      padding: 100px 5%;
+    /* ════════════════════════════════════
+       OPENING STATEMENT
+    ════════════════════════════════════ */
+    #opening {
+      background: var(--ink);
+      padding: 120px 6%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
     }
-    #why .section-title { color: var(--cream); }
-    #why .section-lead { color: rgba(250,247,242,0.65); max-width: 720px; }
-    #why .divider { background: var(--accent-light); }
-    .why-quote {
+    .opening-inner { max-width: 820px; }
+    .opening-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3.5vw, 3.2rem);
-      font-style: italic;
+      font-size: clamp(2rem, 4.5vw, 4.2rem);
       font-weight: 300;
+      font-style: italic;
       line-height: 1.3;
       color: var(--cream);
-      max-width: 860px;
-      margin: 3rem 0;
-      position: relative;
-      padding-left: 2rem;
+      margin-bottom: 2.5rem;
     }
-    .why-quote::before {
-      content: '';
-      position: absolute; left: 0; top: 0.3em;
-      width: 3px; height: 80%;
-      background: var(--accent);
+    .opening-quote strong {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--gold-light);
+    }
+    .opening-divider {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+    }
+    .opening-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(250,247,242,0.55);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
     }
 
-    /* ─── ABOUT ─── */
+    /* ════════════════════════════════════
+       ABOUT
+    ════════════════════════════════════ */
     #about {
-      background: var(--warm-white);
+      padding: 120px 6%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
+      background: var(--warm);
     }
-    .about-image {
+
+    .about-visual { position: relative; }
+    .about-photo-wrap {
       position: relative;
+      overflow: hidden;
     }
-    .about-image img {
+    .about-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px;
+      right: 20px; bottom: 20px;
+      border: 1px solid var(--gold);
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .about-photo-wrap img {
+      position: relative; z-index: 1;
       width: 100%;
       aspect-ratio: 3/4;
       object-fit: cover;
-      border-radius: 2px;
+      display: block;
+      filter: sepia(12%) contrast(1.05) brightness(0.97);
     }
-    .about-image-frame {
-      position: absolute;
-      top: 20px; left: 20px; right: -20px; bottom: -20px;
-      border: 1px solid var(--accent);
-      border-radius: 2px;
-      z-index: -1;
+    .about-badge {
+      position: absolute; z-index: 2;
+      bottom: -24px; right: -24px;
+      width: 110px; height: 110px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
     }
-    .about-text .section-title { margin-bottom: 1.5rem; }
-    .about-body {
-      font-size: 0.97rem;
-      line-height: 1.85;
-      color: var(--text-muted);
+    .about-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .about-badge-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.5);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .eyebrow {
+      font-size: 0.67rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
       margin-bottom: 1.2rem;
     }
-    .about-credentials {
-      display: flex; flex-direction: column; gap: 0.6rem;
-      margin-top: 2rem;
-    }
-    .cred-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-    .cred-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent);
-      margin-top: 7px; flex-shrink: 0;
-    }
-
-    /* ─── PROCESS ─── */
-    #process { background: var(--cream); }
-    .process-intro { max-width: 560px; margin-bottom: 5rem; }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 32px; left: calc(10% + 32px); right: calc(10% + 32px);
-      height: 1px;
-      background: var(--border);
-    }
-    .step {
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center;
-      padding: 0 1rem;
-      position: relative;
-    }
-    .step-num {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: var(--cream);
-      border: 1px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
+    .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-size: clamp(2.2rem, 3.8vw, 4rem);
       font-weight: 300;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      position: relative; z-index: 1;
-      transition: all 0.3s;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
     }
-    .step:hover .step-num {
-      background: var(--accent);
-      color: #fff;
+    .section-title em { font-style: italic; color: var(--gold); }
+    .rule {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      margin: 1.6rem 0;
     }
-    .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.6rem;
-    }
-    .step-desc {
-      font-size: 0.83rem;
-      line-height: 1.65;
-      color: var(--text-muted);
+    .body-text {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1.1rem;
     }
 
-    /* ─── WHAT YOU GET ─── */
-    #what {
-      background: var(--warm-white);
-      padding: 100px 5%;
+    .cred-list { list-style: none; margin-top: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .cred-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;
     }
-    .what-grid {
+    .cred-list li::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold);
+      margin-top: 10px; flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════
+       WHAT IS IT  — EMOTIONAL 3-PANEL
+    ════════════════════════════════════ */
+    #what { background: var(--cream); padding: 120px 6%; }
+    .what-header { max-width: 560px; margin-bottom: 5rem; }
+
+    .pillars {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
-      margin-top: 4rem;
     }
-    .what-card {
-      background: var(--cream);
-      padding: 2.5rem 2rem;
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .what-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-    .what-icon {
-      font-size: 2rem;
-      margin-bottom: 1.2rem;
-      display: block;
-    }
-    .what-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-    }
-    .what-card-text {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
-
-    /* ─── PRICING ─── */
-    #pricing {
-      background: var(--cream);
-      text-align: center;
-    }
-    .pricing-card {
-      max-width: 600px;
-      margin: 4rem auto 0;
-      background: var(--dark);
-      color: var(--cream);
-      padding: 60px 56px;
-      border-radius: 4px;
+    .pillar {
+      background: var(--warm);
+      padding: 3rem 2.2rem;
       position: relative;
       overflow: hidden;
+      transition: background 0.4s;
+    }
+    .pillar:hover { background: var(--parchment); }
+    .pillar-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(196,149,106,0.12);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+    .pillar-icon { font-size: 1.8rem; margin-bottom: 1.2rem; display: block; }
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 500;
+      color: var(--ink); margin-bottom: 0.8rem;
+    }
+    .pillar-text {
+      font-size: 0.88rem; line-height: 1.75;
+      color: var(--muted);
+    }
+    .pillar-accent {
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+    .pillar:hover .pillar-accent { width: 100%; }
+
+    /* ════════════════════════════════════
+       PROCESS — VERTICAL TIMELINE MOBILE-FIRST
+    ════════════════════════════════════ */
+    #process { background: var(--ink); padding: 120px 6%; }
+    #process .eyebrow { color: var(--gold-light); }
+    #process .section-title { color: var(--cream); }
+    #process .rule { background: var(--gold-dim); }
+
+    .timeline {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(196,149,106,0.2);
+      transform: translateX(-50%);
+    }
+
+    .tl-item {
+      padding: 3rem;
+      position: relative;
+    }
+    .tl-item:nth-child(odd) {
+      text-align: right;
+      padding-right: 4rem;
+    }
+    .tl-item:nth-child(even) {
+      padding-left: 4rem;
+    }
+    .tl-dot {
+      position: absolute;
+      top: 3.5rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--ink);
+      box-shadow: 0 0 0 4px rgba(196,149,106,0.2);
+    }
+    .tl-item:nth-child(odd) .tl-dot { right: -5px; }
+    .tl-item:nth-child(even) .tl-dot { left: -5px; }
+
+    .tl-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300;
+      color: rgba(196,149,106,0.2);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .tl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    .tl-text {
+      font-size: 0.87rem; line-height: 1.75;
+      color: rgba(250,247,242,0.5);
+    }
+    .tl-duration {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(196,149,106,0.3);
+      padding-bottom: 2px;
+    }
+
+    /* ════════════════════════════════════
+       FEATURES GRID
+    ════════════════════════════════════ */
+    #features { background: var(--warm); padding: 120px 6%; }
+    .features-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 5rem;
+    }
+    .features-header .rule { margin: 1.6rem auto; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .feature-card {
+      background: var(--cream);
+      padding: 2.5rem 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .feat-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+    .feat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 500;
+      color: var(--ink); margin-bottom: 0.7rem;
+    }
+    .feat-text { font-size: 0.87rem; line-height: 1.75; color: var(--muted); }
+
+    /* ════════════════════════════════════
+       PRICING  — DARK LUXURY
+    ════════════════════════════════════ */
+    #pricing {
+      background: var(--cream);
+      padding: 120px 6%;
+      text-align: center;
+    }
+    .pricing-wrap {
+      max-width: 640px;
+      margin: 4rem auto 0;
+    }
+    .pricing-card {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      padding: 64px 60px;
     }
     .pricing-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
     }
-    .pricing-badge {
+    /* Decorative corner lines */
+    .pricing-card::after {
+      content: '';
+      position: absolute;
+      bottom: 24px; right: 24px;
+      width: 60px; height: 60px;
+      border-bottom: 1px solid rgba(196,149,106,0.2);
+      border-right: 1px solid rgba(196,149,106,0.2);
+    }
+
+    .pricing-label {
       display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
+      color: var(--gold);
+      border: 1px solid rgba(196,149,106,0.3);
+      padding: 6px 18px;
+      margin-bottom: 2rem;
     }
-    .pricing-price {
+    .pricing-amount {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      font-weight: 300;
-      line-height: 1;
+      font-size: 7rem; font-weight: 300;
       color: var(--cream);
-      margin-bottom: 0.25rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
     }
-    .pricing-price span {
-      font-size: 2rem;
+    .pricing-amount sup {
+      font-size: 2.5rem;
       vertical-align: super;
       font-weight: 300;
+      opacity: 0.7;
     }
-    .pricing-period {
-      font-size: 0.8rem;
-      color: rgba(250,247,242,0.5);
-      letter-spacing: 0.1em;
+    .pricing-desc {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.35);
+      margin-top: 0.4rem;
       margin-bottom: 2.5rem;
     }
-    .pricing-divider {
-      width: 40px; height: 1px;
-      background: rgba(250,247,242,0.2);
-      margin: 2rem auto;
+
+    .pricing-rule {
+      width: 100%; height: 1px;
+      background: rgba(250,247,242,0.07);
+      margin: 2rem 0;
     }
-    .pricing-features {
+
+    .pricing-list {
       list-style: none;
       text-align: left;
       margin-bottom: 2.5rem;
     }
-    .pricing-features li {
-      display: flex; align-items: flex-start; gap: 12px;
+    .pricing-list li {
+      display: flex; align-items: flex-start; gap: 14px;
       font-size: 0.9rem;
-      color: rgba(250,247,242,0.8);
-      padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(250,247,242,0.07);
+      color: rgba(250,247,242,0.75);
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(250,247,242,0.05);
       line-height: 1.5;
     }
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--accent-light);
-      font-size: 0.85rem;
-      margin-top: 1px;
+    .pricing-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.6rem;
+      margin-top: 4px;
       flex-shrink: 0;
     }
-    .pricing-note {
-      font-size: 0.78rem;
-      color: rgba(250,247,242,0.4);
-      margin-top: 1rem;
-    }
-    .btn-pricing {
-      display: block;
-      width: 100%;
-      background: var(--accent);
+    .btn-price {
+      display: block; width: 100%;
+      background: var(--gold);
       color: #fff;
-      padding: 16px;
-      font-size: 0.8rem;
+      padding: 17px;
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.25s;
       text-align: center;
+      transition: background 0.3s;
     }
-    .btn-pricing:hover { background: var(--accent-dark); }
+    .btn-price:hover { background: var(--gold-dim); }
+    .pricing-footnote {
+      font-size: 0.75rem;
+      color: rgba(250,247,242,0.3);
+      margin-top: 1.2rem;
+    }
 
-    /* ─── FAQ ─── */
-    #faq {
-      background: var(--warm-white);
+    /* ════════════════════════════════════
+       EMOTIONAL INTERLUDE
+    ════════════════════════════════════ */
+    #interlude {
+      position: relative;
+      min-height: 60vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
     }
-    .faq-wrap {
-      max-width: 720px;
-      margin: 4rem auto 0;
+    .interlude-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://tasha.wasmer.app/assets/typewriter-outdoor.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
+    .interlude-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,7,5,0.72);
     }
-    .faq-q {
-      width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 0;
+    .interlude-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 80px 6%;
+      max-width: 780px;
+    }
+    .interlude-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3.6rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.9);
+    }
+    .interlude-text em { color: var(--gold-light); font-style: normal; }
+    .interlude-credit {
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ════════════════════════════════════
+       FAQ
+    ════════════════════════════════════ */
+    #faq { background: var(--warm); padding: 120px 6%; }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-sticky { position: sticky; top: 100px; }
+    .faq-lead {
+      font-size: 0.93rem; line-height: 1.85;
+      color: var(--muted); margin-top: 1.5rem;
+      font-weight: 300;
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--parchment); }
+    .faq-btn {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 0;
       background: none; border: none; cursor: pointer;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--text);
-      text-align: left;
-      gap: 1rem;
+      font-size: 1.22rem; font-weight: 500;
+      color: var(--ink); text-align: left; gap: 1rem;
+      transition: color 0.2s;
     }
-    .faq-q:hover { color: var(--accent); }
-    .faq-icon {
-      width: 24px; height: 24px;
+    .faq-btn:hover { color: var(--gold); }
+    .faq-plus {
+      width: 28px; height: 28px; flex-shrink: 0;
       border: 1px solid var(--border);
-      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: 1rem;
-      color: var(--accent);
-      transition: all 0.3s;
+      font-size: 1.1rem; color: var(--gold);
+      transition: all 0.3s; border-radius: 50%;
     }
-    .faq-item.open .faq-icon { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(45deg); }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-    .faq-a-inner {
+    .faq-item.open .faq-plus { background: var(--gold); color: #fff; border-color: var(--gold); transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer-inner {
       padding: 0 0 1.5rem;
-      font-size: 0.93rem;
-      line-height: 1.8;
-      color: var(--text-muted);
+      font-size: 0.92rem; line-height: 1.85;
+      color: var(--muted);
     }
 
-    /* ─── CONTACT ─── */
+    /* ════════════════════════════════════
+       CONTACT
+    ════════════════════════════════════ */
     #contact {
-      background: var(--parchment);
+      background: var(--ink);
+      padding: 120px 6%;
       text-align: center;
     }
-    #contact .section-lead { margin: 0 auto 3rem; }
+    #contact .eyebrow { color: var(--gold-light); }
+    #contact .section-title { color: var(--cream); }
+    #contact .rule { background: var(--gold-dim); margin: 1.6rem auto; }
+
+    .contact-subtitle {
+      font-size: 1rem; line-height: 1.85;
+      color: rgba(250,247,242,0.5);
+      max-width: 520px; margin: 0 auto 4rem;
+      font-weight: 300;
+    }
+
     .contact-card {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      padding: 48px 56px;
-      border-radius: 4px;
-      max-width: 500px;
-      width: 100%;
+      display: inline-flex; flex-direction: column; align-items: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(196,149,106,0.2);
+      padding: 52px 60px;
+      max-width: 480px; width: 100%;
     }
     .contact-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 0.3rem;
+      font-size: 2.2rem; font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
     }
-    .contact-title {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+    .contact-role {
+      font-size: 0.68rem; letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2rem;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
     }
-    .contact-details {
-      display: flex; flex-direction: column; gap: 0.75rem;
-      margin-bottom: 2rem;
-      width: 100%;
-    }
-    .contact-line {
+    .contact-links { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; margin-bottom: 2.5rem; }
+    .contact-link {
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-size: 0.9rem; color: rgba(250,247,242,0.65);
+      text-decoration: none; transition: color 0.2s;
     }
-    .contact-line:hover { color: var(--accent); }
-    .contact-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .contact-link:hover { color: var(--gold-light); }
+    .contact-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
     .btn-wa {
       display: inline-flex; align-items: center; gap: 10px;
-      background: #25D366;
-      color: #fff;
-      padding: 13px 28px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.25s;
+      background: #25D366; color: #fff;
+      padding: 14px 30px;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.25s;
     }
     .btn-wa:hover { background: #1da857; }
-    .btn-mail {
+    .btn-email {
       display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 13px 28px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.25s;
+      border: 1px solid rgba(196,149,106,0.4); color: var(--gold);
+      padding: 14px 30px;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+      background: transparent;
     }
-    .btn-mail:hover { background: var(--accent); color: #fff; }
+    .btn-email:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
 
-    /* ─── FOOTER ─── */
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
     footer {
-      background: var(--dark);
-      color: rgba(250,247,242,0.4);
-      text-align: center;
-      padding: 2rem 5%;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
+      background: #0A0704;
+      padding: 2.5rem 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
     }
-    footer a { color: var(--accent-light); text-decoration: none; }
+    footer p {
+      font-size: 0.75rem;
+      color: rgba(250,247,242,0.25);
+      letter-spacing: 0.06em;
+    }
+    footer a { color: var(--gold-light); text-decoration: none; font-size: 0.75rem; }
 
-    /* ─── FLOATING WA ─── */
-    .float-wa {
-      position: fixed;
-      bottom: 28px; right: 28px;
-      z-index: 200;
-      width: 56px; height: 56px;
-      background: #25D366;
-      border-radius: 50%;
+    /* ════════════════════════════════════
+       FLOATING WHATSAPP
+    ════════════════════════════════════ */
+    .fab {
+      position: fixed; bottom: 28px; right: 28px; z-index: 300;
+      width: 58px; height: 58px;
+      background: #25D366; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
       text-decoration: none;
       transition: transform 0.25s, box-shadow 0.25s;
     }
-    .float-wa:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
-    }
-    .float-wa svg { width: 28px; height: 28px; fill: #fff; }
+    .fab:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+    .fab svg { width: 28px; height: 28px; fill: #fff; }
 
-    /* ─── FADE IN ─── */
+    /* ════════════════════════════════════
+       REVEAL ANIMATION
+    ════════════════════════════════════ */
     .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
 
-    /* ─── MOBILE NAV ─── */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 68px; left: 0; right: 0;
-      background: var(--cream);
-      border-bottom: 1px solid var(--border);
-      padding: 1.5rem 5%;
-      flex-direction: column;
-      gap: 1.2rem;
-      z-index: 99;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
+    /* ════════════════════════════════════
+       KEYFRAMES
+    ════════════════════════════════════ */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes slideUp { from { opacity:0; transform:translateY(100%); } to { opacity:1; transform:none; } }
+    @keyframes scrollPulse {
+      0%,100% { opacity:0.4; transform:scaleY(1); transform-origin:top; }
+      50% { opacity:1; transform:scaleY(0.6); transform-origin:top; }
     }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 960px) {
-      #about {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      .about-image { max-width: 400px; }
-      .steps-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .steps-grid::before { display: none; }
-      .what-grid { grid-template-columns: 1fr 1fr; }
+    /* ════════════════════════════════════
+       RESPONSIVE — TABLET
+    ════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { max-width: 420px; }
+      .timeline { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .tl-item { padding: 2rem 0 2rem 3rem; text-align: left !important; }
+      .tl-item:nth-child(odd) { padding-right: 0; }
+      .tl-dot { left: 0 !important; right: auto !important; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .faq-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-sticky { position: static; }
     }
 
+    /* ════════════════════════════════════
+       RESPONSIVE — MOBILE
+    ════════════════════════════════════ */
     @media (max-width: 768px) {
-      section { padding: 72px 5%; }
       nav { padding: 0 5%; }
       .nav-links { display: none; }
       .burger { display: flex; }
-      #hero { padding: 100px 5% 60px; min-height: auto; }
-      .hero-image-wrap { display: none; }
-      .hero-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
-      .hero-trust { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .what-grid { grid-template-columns: 1fr; }
+
+      section, #opening, #about, #what, #process, #features, #pricing, #faq, #contact {
+        padding: 80px 5%;
+      }
+      #hero { min-height: 100svh; }
+
+      .hero-title { font-size: clamp(2.8rem, 11vw, 4.5rem); }
+      .hero-sub { font-size: 0.95rem; }
+      .btn-hero-primary, .btn-hero-secondary { padding: 14px 26px; font-size: 0.7rem; }
+
+      .opening-quote { font-size: clamp(1.6rem, 6vw, 2.6rem); }
+
+      .about-badge { width: 88px; height: 88px; bottom: -16px; right: -16px; }
+      .about-badge-num { font-size: 1.6rem; }
+
+      .pillars { grid-template-columns: 1fr; gap: 2px; }
+      .features-grid { grid-template-columns: 1fr; }
+
       .pricing-card { padding: 40px 28px; }
+      .pricing-amount { font-size: 5rem; }
+
       .contact-card { padding: 36px 24px; }
-      .contact-actions { flex-direction: column; width: 100%; }
-      .btn-wa, .btn-mail { justify-content: center; }
+      .contact-btns { flex-direction: column; width: 100%; }
+      .btn-wa, .btn-email { justify-content: center; }
+
+      footer { flex-direction: column; text-align: center; }
+
+      /* Timeline on mobile — single column */
+      .tl-item { padding: 1.5rem 0 1.5rem 2.5rem; }
+      .tl-num { font-size: 2.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+      .pricing-card { padding: 32px 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="mainNav">
+<!-- ── NAV ────────────────────────── -->
+<nav id="nav">
   <a href="#" class="nav-logo">Our Story</a>
   <ul class="nav-links">
     <li><a href="#about">Об авторе</a></li>
     <li><a href="#process">Процесс</a></li>
     <li><a href="#pricing">Цена</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Связаться</a></li>
+    <li><a href="#contact" class="nav-cta">Начать</a></li>
   </ul>
-  <div class="burger" id="burger" onclick="toggleMobile()">
+  <div class="burger" onclick="openMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
-<div class="mobile-nav" id="mobileNav">
-  <a href="#about" onclick="closeMobile()">Об авторе</a>
-  <a href="#process" onclick="closeMobile()">Как мы работаем</a>
-  <a href="#pricing" onclick="closeMobile()">Цена</a>
-  <a href="#faq" onclick="closeMobile()">FAQ</a>
-  <a href="#contact" onclick="closeMobile()">Связаться</a>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">×</button>
+  <a href="#about" onclick="closeMenu()">Об авторе</a>
+  <a href="#process" onclick="closeMenu()">Процесс</a>
+  <a href="#pricing" onclick="closeMenu()">Цена</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#contact" onclick="closeMenu()">Начать</a>
 </div>
 
-<!-- HERO -->
+<!-- ── HERO ───────────────────────── -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-image-wrap">
-    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=80" alt="Написание воспоминаний" />
-    <div class="hero-image-overlay"></div>
-  </div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+
   <div class="hero-content">
-    <p class="hero-eyebrow reveal">Семейные мемуары · Книга воспоминаний</p>
-    <h1 class="hero-title reveal reveal-delay-1">
-      Сохраните <em>голоса</em><br>ваших близких
+    <p class="hero-eyebrow">Семейные мемуары · Книга воспоминаний</p>
+
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">Слова, которые</span></span>
+      <span class="line"><span class="line-inner"><em>не должны</em></span></span>
+      <span class="line"><span class="line-inner">исчезнуть</span></span>
     </h1>
-    <p class="hero-subtitle reveal reveal-delay-2">
-      Я превращаю воспоминания вашей семьи в живую, тёплую книгу — семейную реликвию, которую будут бережно хранить поколениями.
+
+    <p class="hero-sub">
+      Я превращаю воспоминания вашей семьи в живую, тёплую книгу —<br>
+      реликвию, которую будут бережно хранить поколениями.
     </p>
-    <div class="hero-actions reveal reveal-delay-3">
-      <a href="https://wa.me/972545966450" target="_blank" class="btn-primary">Бесплатная встреча</a>
-      <a href="#about" class="btn-secondary">Узнать больше</a>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/972545966450" target="_blank" class="btn-hero-primary">
+        Бесплатная встреча
+      </a>
+      <a href="#about" class="btn-hero-secondary">
+        Узнать больше
+      </a>
     </div>
-    <div class="hero-trust reveal reveal-delay-4">
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">📚</span>
-        <span>Журналист и писатель</span>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🎓</span>
-        <span>Магистр психологии</span>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">✍️</span>
-        <span>Несколько лет опыта</span>
-      </div>
-    </div>
+  </div>
+
+  <div class="hero-scroll" onclick="document.getElementById('opening').scrollIntoView({behavior:'smooth'})">
+    <span>Пролистать</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- WHY -->
-<section id="why">
-  <p class="section-eyebrow reveal" style="color: var(--accent-light)">Зачем это важно</p>
-  <div class="divider"></div>
-  <blockquote class="why-quote reveal">
-    «Иногда так сильно хочется снова услышать голос бабушки или дедушки… задать вопрос, который давно вертится в голове, посмеяться над семейной шуткой или просто почувствовать их рядом. Но многих уже нет.»
-  </blockquote>
-  <p class="section-lead reveal" style="color: rgba(250,247,242,0.6); margin-top: 2rem;">
-    Каждая семья — это уникальная вселенная историй, характеров и судеб. Со временем эти истории исчезают вместе с людьми, которые их несли. OUR STORY существует, чтобы этого не произошло.
-  </p>
+<!-- ── OPENING STATEMENT ─────────── -->
+<section id="opening">
+  <div class="opening-inner">
+    <blockquote class="opening-quote reveal">
+      «Иногда так сильно хочется снова услышать голос бабушки…
+      задать вопрос, который давно вертится в голове,
+      посмеяться над семейной шуткой.
+      Но <strong>многих уже нет.</strong>»
+    </blockquote>
+    <div class="opening-divider reveal reveal-d1"></div>
+    <p class="opening-body reveal reveal-d2">
+      Каждая семья — это уникальная вселенная историй, характеров и судеб.
+      Со временем эти истории исчезают вместе с людьми, которые их несли.
+      OUR STORY существует, чтобы этого не произошло.
+    </p>
+  </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ── ABOUT ──────────────────────── -->
 <section id="about">
-  <div class="about-image reveal">
-    <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=700&auto=format&fit=crop&q=80" alt="Таша Карлюка" />
-    <div class="about-image-frame"></div>
+  <div class="about-visual reveal">
+    <div class="about-photo-wrap">
+      <img src="https://tasha.wasmer.app/assets/about-portrait.jpg" alt="Таша Карлюка — журналист и писатель" />
+    </div>
+    <div class="about-badge">
+      <span class="about-badge-num">10+</span>
+      <span class="about-badge-label">лет в<br>журналистике</span>
+    </div>
   </div>
+
   <div class="about-text">
-    <p class="section-eyebrow reveal">Об авторе</p>
+    <p class="eyebrow reveal">Об авторе</p>
     <h2 class="section-title reveal">Таша <em>Карлюка</em></h2>
-    <div class="divider reveal"></div>
-    <p class="about-body reveal">
-      Я журналист, писатель и сценарист. Родилась в Киеве, жила в Тель-Авиве, Европе и израильской пустыне. Сейчас живу в тихой деревне под Иерусалимом.
+    <div class="rule reveal"></div>
+    <p class="body-text reveal">
+      Я журналист, писатель и сценарист. Родилась в Киеве, жила в Тель-Авиве,
+      Европе и израильской пустыне. Сейчас живу в тихой деревне под Иерусалимом.
     </p>
-    <p class="about-body reveal">
-      У меня степень магистра психологии. Это помогает мне вести интервью так, чтобы собеседник чувствовал себя в безопасности — и говорил о том, о чём обычно молчат.
+    <p class="body-text reveal reveal-d1">
+      У меня степень магистра психологии — это помогает мне вести интервью так,
+      чтобы человек чувствовал себя в безопасности и говорил о том, о чём обычно молчат.
     </p>
-    <div class="about-credentials reveal">
-      <div class="cred-item">
-        <div class="cred-dot"></div>
-        <span>Сценарист фильмов «Феликс и его любовь» и «Беренштейн»</span>
-      </div>
-      <div class="cred-item">
-        <div class="cred-dot"></div>
-        <span>Рассказы в антологиях под редакцией Людмилы Улицкой</span>
-      </div>
-      <div class="cred-item">
-        <div class="cred-dot"></div>
-        <span>Авторская книга «Океаны в трёхлитровых банках» (2021)</span>
-      </div>
-      <div class="cred-item">
-        <div class="cred-dot"></div>
-        <span>Несколько лет помогаю семьям сохранять их истории</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT YOU GET -->
-<section id="what">
-  <div style="max-width:560px">
-    <p class="section-eyebrow reveal">Что такое OUR STORY</p>
-    <h2 class="section-title reveal">Очень личная <em>книга</em><br>из настоящих историй</h2>
-    <div class="divider reveal"></div>
-    <p class="section-lead reveal">Это не шаблонный альбом и не анкета. Это живая книга, созданная из настоящих разговоров — бережно, с любовью к деталям.</p>
-  </div>
-  <div class="what-grid" style="margin-top:4rem">
-    <div class="what-card reveal">
-      <span class="what-icon">🎙️</span>
-      <h3 class="what-card-title">Живые интервью</h3>
-      <p class="what-card-text">Я лично провожу все беседы — не делегирую никому. Вопросы готовлю специально под вашу семью. Тёплый, безопасный формат, в котором раскрываются даже те, кто «не умеет рассказывать».</p>
-    </div>
-    <div class="what-card reveal reveal-delay-1">
-      <span class="what-icon">✍️</span>
-      <h3 class="what-card-title">Литературный текст</h3>
-      <p class="what-card-text">Я превращаю разговоры в живой, тёплый текст, сохраняя настоящий голос каждого человека. Не пересказ — а портрет. Вы узнаете своих близких в каждой фразе.</p>
-    </div>
-    <div class="what-card reveal reveal-delay-2">
-      <span class="what-icon">📖</span>
-      <h3 class="what-card-title">Готовая книга</h3>
-      <p class="what-card-text">Электронная версия входит в стоимость. Красивое твёрдое издание — дополнительно. Вы участвуете на каждом этапе: читаете и утверждаете каждую страницу.</p>
-    </div>
-    <div class="what-card reveal reveal-delay-3">
-      <span class="what-icon">💎</span>
-      <h3 class="what-card-title">Семейная реликвия</h3>
-      <p class="what-card-text">Книга, которую будут читать дети, внуки и правнуки. Она хранит не только факты, но и интонации, юмор, характеры — то, что невозможно восстановить потом.</p>
-    </div>
-    <div class="what-card reveal reveal-delay-4">
-      <span class="what-icon">🔒</span>
-      <h3 class="what-card-title">Конфиденциальность</h3>
-      <p class="what-card-text">Ваши истории остаются только вашими. Я не публикую ничего без вашего согласия. Семейные тайны в надёжных руках.</p>
-    </div>
-    <div class="what-card reveal reveal-delay-1">
-      <span class="what-icon">🌍</span>
-      <h3 class="what-card-title">Любой язык, любая страна</h3>
-      <p class="what-card-text">Работаю онлайн с семьями по всему миру. Интервью — по видеосвязи. Пишу на русском языке. Ваши близкие могут находиться в разных городах и странах.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="process-intro">
-    <p class="section-eyebrow reveal">Как мы работаем</p>
-    <h2 class="section-title reveal">Простой путь<br>к <em>вечной книге</em></h2>
-    <div class="divider reveal"></div>
-    <p class="section-lead reveal">От первого разговора до готовой книги — 2–4 месяца. Вы занимаетесь своей жизнью, я занимаюсь всем остальным.</p>
-  </div>
-  <div class="steps-grid">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <h3 class="step-title">Бесплатная встреча</h3>
-      <p class="step-desc">Поговорим о том, какую историю вы хотите сохранить. Я помогу определить структуру и людей, которых стоит расспросить.</p>
-    </div>
-    <div class="step reveal reveal-delay-1">
-      <div class="step-num">02</div>
-      <h3 class="step-title">Интервью</h3>
-      <p class="step-desc">Тёплые беседы по 90 минут с вами и близкими. Обычно 10–15 встреч. Я веду каждую лично, с индивидуальными вопросами.</p>
-    </div>
-    <div class="step reveal reveal-delay-2">
-      <div class="step-num">03</div>
-      <h3 class="step-title">Создание книги</h3>
-      <p class="step-desc">Превращаю разговоры в живой текст. Вы читаете и утверждаете каждую страницу — это ваша книга.</p>
-    </div>
-    <div class="step reveal reveal-delay-3">
-      <div class="step-num">04</div>
-      <h3 class="step-title">Финальная версия</h3>
-      <p class="step-desc">После вашего утверждения — вёрстка и оформление. Электронная книга готова к передаче всей семье.</p>
-    </div>
-    <div class="step reveal reveal-delay-4">
-      <div class="step-num">05</div>
-      <h3 class="step-title">Печатное издание</h3>
-      <p class="step-desc">По желанию — красивая книга в твёрдом переплёте. Дополнительно 100€. Та самая реликвия для полки.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <p class="section-eyebrow reveal">Стоимость</p>
-  <h2 class="section-title reveal">Одна цена,<br><em>всё включено</em></h2>
-  <div class="divider reveal" style="margin: 1.5rem auto"></div>
-  <div class="pricing-card reveal">
-    <span class="pricing-badge">Полный пакет</span>
-    <div class="pricing-price"><span>€</span>3000</div>
-    <div class="pricing-period">полное создание книги «под ключ»</div>
-    <div class="pricing-divider"></div>
-    <ul class="pricing-features">
-      <li>Бесплатная ознакомительная встреча</li>
-      <li>Серия глубоких интервью (10–15 встреч по 90 минут)</li>
-      <li>Индивидуальные вопросы под вашу семью</li>
-      <li>Литературная обработка всех материалов</li>
-      <li>Сохранение живого голоса каждого члена семьи</li>
-      <li>Вёрстка и оформление</li>
-      <li>Электронная версия книги в финале</li>
-      <li>Твёрдый переплёт — дополнительно +100€</li>
+    <ul class="cred-list reveal reveal-d2">
+      <li>Сценарист фильмов «Феликс и его любовь» и «Беренштейн»</li>
+      <li>Рассказы в антологиях под редакцией Людмилы Улицкой</li>
+      <li>Авторская книга «Океаны в трёхлитровых банках» (2021)</li>
+      <li>Магистр психологии — веду интервью с душой</li>
     </ul>
-    <a href="https://wa.me/972545966450" target="_blank" class="btn-pricing">Начать — Написать в WhatsApp</a>
-    <p class="pricing-note">Бесплатная первая встреча · Без скрытых платежей</p>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ── WHAT IS IT ────────────────── -->
+<section id="what">
+  <div class="what-header">
+    <p class="eyebrow reveal">Что такое OUR STORY</p>
+    <h2 class="section-title reveal">Не альбом.<br>Не анкета.<br><em>Живая книга.</em></h2>
+    <div class="rule reveal"></div>
+    <p class="body-text reveal">
+      Это книга, рождённая из настоящих разговоров — бережно, с любовью к деталям.
+      Книга, которая сохранит не только факты, но и интонации, юмор, характер.
+    </p>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar reveal">
+      <div class="pillar-num">01</div>
+      <span class="pillar-icon">🎙️</span>
+      <h3 class="pillar-title">Живые интервью</h3>
+      <p class="pillar-text">Тёплые беседы по 90 минут — лично, онлайн, в любой стране. Я провожу каждую встречу сама. Даже самые молчаливые начинают говорить.</p>
+      <div class="pillar-accent"></div>
+    </div>
+    <div class="pillar reveal reveal-d1">
+      <div class="pillar-num">02</div>
+      <span class="pillar-icon">✍️</span>
+      <h3 class="pillar-title">Литературный текст</h3>
+      <p class="pillar-text">Превращаю разговоры в живой текст, сохраняя настоящий голос каждого человека. Вы узнаете своих близких в каждой фразе.</p>
+      <div class="pillar-accent"></div>
+    </div>
+    <div class="pillar reveal reveal-d2">
+      <div class="pillar-num">03</div>
+      <span class="pillar-icon">📖</span>
+      <h3 class="pillar-title">Вечная реликвия</h3>
+      <p class="pillar-text">Книга, которую будут читать дети, внуки и правнуки. Она хранит то, что невозможно восстановить: интонации, шутки, судьбы.</p>
+      <div class="pillar-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ────────────────────── -->
+<section id="process">
+  <div style="max-width:540px; margin-bottom:5rem;">
+    <p class="eyebrow reveal">Как это работает</p>
+    <h2 class="section-title reveal">От первого звонка<br>до <em>готовой книги</em></h2>
+    <div class="rule reveal"></div>
+    <p class="body-text reveal" style="color:rgba(250,247,242,0.5);">
+      Вы занимаетесь своей жизнью — я занимаюсь всем остальным.
+      Весь процесс занимает 2–4 месяца.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-num">01</div>
+      <h3 class="tl-title">Бесплатная встреча</h3>
+      <p class="tl-text">Знакомимся, обсуждаем вашу семью и историю. Я помогаю понять, чья история должна быть рассказана и как её лучше сохранить.</p>
+      <span class="tl-duration">Без обязательств</span>
+    </div>
+    <div class="tl-item reveal reveal-d1">
+      <div class="tl-dot"></div>
+      <div class="tl-num">02</div>
+      <h3 class="tl-title">Серия интервью</h3>
+      <p class="tl-text">10–15 бесед по 90 минут с вами и вашими близкими. Индивидуальные вопросы для каждого. Тёплая, безопасная атмосфера.</p>
+      <span class="tl-duration">4–8 недель</span>
+    </div>
+    <div class="tl-item reveal reveal-d2">
+      <div class="tl-dot"></div>
+      <div class="tl-num">03</div>
+      <h3 class="tl-title">Написание книги</h3>
+      <p class="tl-text">Превращаю записи в литературный текст. Вы читаете каждую главу по мере создания — это ваша книга, и она выходит именно такой, какой должна быть.</p>
+      <span class="tl-duration">3–6 недель</span>
+    </div>
+    <div class="tl-item reveal reveal-d3">
+      <div class="tl-dot"></div>
+      <div class="tl-num">04</div>
+      <h3 class="tl-title">Финальная книга</h3>
+      <p class="tl-text">Электронная версия — в подарок всей семье. По желанию — красивое твёрдое издание (+100€). Книга, которую будут хранить поколениями.</p>
+      <span class="tl-duration">Готово навсегда</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────── -->
+<section id="features">
+  <div class="features-header">
+    <p class="eyebrow reveal">Всё включено</p>
+    <h2 class="section-title reveal">Почему семьи<br>выбирают <em>OUR STORY</em></h2>
+    <div class="rule reveal"></div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feat-icon">🌍</span>
+      <h3 class="feat-title">Любая страна, любой язык</h3>
+      <p class="feat-text">Работаю онлайн с семьями по всему миру. Интервью — по видеосвязи. Ваши близкие могут быть в разных городах и странах.</p>
+    </div>
+    <div class="feature-card reveal reveal-d1">
+      <span class="feat-icon">🎓</span>
+      <h3 class="feat-title">Психолог + журналист</h3>
+      <p class="feat-text">Магистр психологии и опытный журналист — я умею слушать так, чтобы человек открылся. Самые молчаливые начинают говорить.</p>
+    </div>
+    <div class="feature-card reveal reveal-d2">
+      <span class="feat-icon">🔒</span>
+      <h3 class="feat-title">Полная конфиденциальность</h3>
+      <p class="feat-text">Ваши истории остаются только вашими. Я не публикую ничего без согласия. Семейные тайны — в надёжных руках.</p>
+    </div>
+    <div class="feature-card reveal reveal-d3">
+      <span class="feat-icon">✋</span>
+      <h3 class="feat-title">Всё делаю лично</h3>
+      <p class="feat-text">Каждое интервью, каждая страница — моя работа. Не делегирую. Вы работаете со мной, а не с командой незнакомцев.</p>
+    </div>
+    <div class="feature-card reveal reveal-d4">
+      <span class="feat-icon">👁️</span>
+      <h3 class="feat-title">Вы участвуете в каждом шаге</h3>
+      <p class="feat-text">Читаете и утверждаете каждую страницу. Книга создаётся вместе с вами — это ваша история, и она должна быть именно такой.</p>
+    </div>
+    <div class="feature-card reveal reveal-d1">
+      <span class="feat-icon">⏳</span>
+      <h3 class="feat-title">Не откладывайте</h3>
+      <p class="feat-text">Каждый день уходят голоса, которые уже нельзя будет вернуть. Начните сейчас — пока ещё есть время сохранить то, что дорого.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTERLUDE ──────────────────── -->
+<div id="interlude">
+  <div class="interlude-bg"></div>
+  <div class="interlude-overlay"></div>
+  <div class="interlude-content">
+    <p class="interlude-text reveal">
+      «Книга — это не просто страницы.<br>
+      Это <em>голос человека</em>,<br>
+      который будет жить вечно.»
+    </p>
+    <p class="interlude-credit reveal reveal-d1">— Таша Карлюка</p>
+  </div>
+</div>
+
+<!-- ── PRICING ────────────────────── -->
+<section id="pricing">
+  <p class="eyebrow reveal">Стоимость</p>
+  <h2 class="section-title reveal">Одна цена — <em>всё включено</em></h2>
+  <div class="rule reveal" style="margin:1.6rem auto;"></div>
+
+  <div class="pricing-wrap">
+    <div class="pricing-card reveal">
+      <span class="pricing-label">Полная книга «под ключ»</span>
+      <div class="pricing-amount"><sup>€</sup>3000</div>
+      <div class="pricing-desc">единовременная оплата · без скрытых платежей</div>
+
+      <div class="pricing-rule"></div>
+
+      <ul class="pricing-list">
+        <li>Бесплатная первая встреча — без обязательств</li>
+        <li>10–15 глубоких интервью по 90 минут</li>
+        <li>Индивидуальные вопросы под вашу семью</li>
+        <li>Литературная обработка всех материалов</li>
+        <li>Сохранение живого голоса каждого члена семьи</li>
+        <li>Вы читаете и утверждаете каждую страницу</li>
+        <li>Электронная версия готовой книги</li>
+        <li>Работа через интернет — любая страна мира</li>
+        <li>Печатное издание в твёрдом переплёте — +100€</li>
+      </ul>
+
+      <a href="https://wa.me/972545966450" target="_blank" class="btn-price">
+        Написать в WhatsApp — начать бесплатно
+      </a>
+      <p class="pricing-footnote">Первая встреча бесплатна · Без скрытых платежей</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────── -->
 <section id="faq">
-  <div style="text-align:center; max-width:560px; margin:0 auto 4rem;">
-    <p class="section-eyebrow reveal">Часто задаваемые вопросы</p>
-    <h2 class="section-title reveal">Остались <em>вопросы?</em></h2>
-    <div class="divider reveal" style="margin:1.5rem auto"></div>
-  </div>
-  <div class="faq-wrap">
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Для кого подходит эта услуга?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">Для тех, кто хочет сохранить историю пожилых родителей или бабушек и дедушек, пока это ещё возможно. Для людей, которые сами хотят записать свою жизнь для детей. Для семей, где есть удивительные судьбы, которые нельзя потерять. Возраст, география и размер семьи — не имеют значения.</div>
-      </div>
+  <div class="faq-inner">
+    <div class="faq-sticky">
+      <p class="eyebrow reveal">Вопросы и ответы</p>
+      <h2 class="section-title reveal">Остались<br><em>вопросы?</em></h2>
+      <div class="rule reveal"></div>
+      <p class="faq-lead reveal">
+        Я понимаю, что это важное решение.
+        Здесь — ответы на самые частые вопросы.
+        Если вашего нет — просто напишите мне.
+      </p>
     </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Что если мой близкий «не умеет рассказывать»?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">Именно для этого я здесь. У меня есть степень магистра психологии и многолетний опыт интервью. Я умею создавать атмосферу, в которой самые молчаливые люди начинают говорить. Обычно после первых 20 минут человек забывает о камере или диктофоне.</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Для кого это подходит?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Для тех, кто хочет сохранить историю пожилых родителей или бабушек-дедушек, пока это ещё возможно. Для людей, которые сами хотят записать свою жизнь для детей. Для семей с удивительными судьбами, которые нельзя потерять. Возраст, география и размер семьи — не имеют значения.</div>
+        </div>
       </div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        На каком языке будет написана книга?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">Книга пишется на русском языке. Интервью могут проходить на русском или иврите. Если вам нужна книга на другом языке — обсудим индивидуально.</div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Что если близкий человек «не умеет рассказывать»?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Именно для этого я здесь. У меня степень магистра психологии и многолетний опыт интервью. Я умею создавать атмосферу, в которой самые молчаливые люди начинают говорить. Обычно после первых 20 минут человек забывает о записи и просто разговаривает.</div>
+        </div>
       </div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Можно ли работать онлайн, если мы в разных странах?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">Да, полностью. Все интервью проходят по видеосвязи (Zoom или WhatsApp). Работаю с семьями в Израиле, России, Европе, Америке. Часовые пояса — не проблема.</div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Можно ли работать онлайн, если мы в разных странах?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Да, полностью онлайн. Все интервью — по видеосвязи (Zoom или WhatsApp). Работаю с семьями в Израиле, России, Европе, Америке, Австралии. Часовые пояса — не проблема, мы всегда находим удобное время.</div>
+        </div>
       </div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Сколько времени это займёт?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">В среднем 2–4 месяца от первой встречи до готовой книги. Это зависит от количества людей, которых нужно расспросить, и от ритма встреч, который удобен вашей семье.</div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Сколько времени займёт весь процесс?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">В среднем 2–4 месяца от первой встречи до готовой книги. Это зависит от количества людей, которых нужно расспросить, и от ритма встреч, который удобен вашей семье. Спешки нет — важно сделать всё хорошо.</div>
+        </div>
       </div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Что если близкий человек уйдёт до завершения книги?
-        <div class="faq-icon">+</div>
-      </button>
-      <div class="faq-a">
-        <div class="faq-a-inner">Я понимаю, как важен каждый день. Именно поэтому я рекомендую начинать как можно скорее — даже если кажется, что «ещё есть время». Если что-то случится в процессе работы, мы бережно завершим книгу на основе собранных материалов.</div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          На каком языке будет написана книга?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Книга пишется на русском языке. Интервью проходят на русском или иврите. Если вам нужна книга на другом языке — обсудим индивидуально.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Что если близкий человек уйдёт до завершения?
+          <span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Я понимаю, как важен каждый день. Именно поэтому рекомендую начинать как можно раньше — даже если кажется, что «ещё есть время». Если что-то случится в процессе, мы бережно завершим книгу на основе собранных материалов.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ── CONTACT ────────────────────── -->
 <section id="contact">
-  <p class="section-eyebrow reveal">Свяжитесь со мной</p>
+  <p class="eyebrow reveal">Свяжитесь со мной</p>
   <h2 class="section-title reveal">Готовы сохранить<br><em>вашу историю?</em></h2>
-  <div class="divider reveal" style="margin:1.5rem auto"></div>
-  <p class="section-lead reveal">Напишите мне прямо сейчас — я отвечу лично. Начнём с бесплатной ознакомительной встречи, без обязательств.</p>
-  <div class="reveal" style="display:flex; justify-content:center; margin-top:3rem;">
+  <div class="rule reveal" style="margin:1.6rem auto;"></div>
+  <p class="contact-subtitle reveal">
+    Напишите мне прямо сейчас — я отвечу лично.
+    Начнём с бесплатной встречи, без обязательств.
+  </p>
+
+  <div class="reveal" style="display:flex;justify-content:center;">
     <div class="contact-card">
       <div class="contact-name">Таша Карлюка</div>
-      <div class="contact-title">Журналист · Писатель · Сценарист</div>
-      <div class="contact-details">
-        <a href="mailto:tasha.karluka@gmail.com" class="contact-line">
-          ✉️ tasha.karluka@gmail.com
+      <div class="contact-role">Журналист · Писатель · Сценарист</div>
+      <div class="contact-links">
+        <a href="mailto:tasha.karluka@gmail.com" class="contact-link">
+          ✉️ &nbsp;tasha.karluka@gmail.com
         </a>
-        <a href="https://wa.me/972545966450" target="_blank" class="contact-line">
-          📱 +972 54-596-6450
+        <a href="https://wa.me/972545966450" target="_blank" class="contact-link">
+          📱 &nbsp;+972 54-596-6450
         </a>
       </div>
-      <div class="contact-actions">
+      <div class="contact-btns">
         <a href="https://wa.me/972545966450" target="_blank" class="btn-wa">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp
         </a>
-        <a href="mailto:tasha.karluka@gmail.com" class="btn-mail">✉️ Email</a>
+        <a href="mailto:tasha.karluka@gmail.com" class="btn-email">✉️ Email</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ─────────────────────── -->
 <footer>
-  <p>© 2025 OUR STORY · Таша Карлюка · Все права защищены</p>
+  <p>© 2025 OUR STORY · Таша Карлюка</p>
+  <a href="mailto:tasha.karluka@gmail.com">tasha.karluka@gmail.com</a>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/972545966450" target="_blank" class="float-wa" title="Написать в WhatsApp">
+<!-- ── FLOATING WA ───────────────── -->
+<a href="https://wa.me/972545966450" target="_blank" class="fab" title="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-  // Nav scroll
+  /* ── Nav scroll ── */
+  const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Hero bg zoom ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('heroBg').classList.add('loaded'), 100);
   });
 
-  // Mobile nav
-  function toggleMobile() {
-    document.getElementById('mobileNav').classList.toggle('open');
-  }
-  function closeMobile() {
-    document.getElementById('mobileNav').classList.remove('open');
-  }
-
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-        observer.unobserve(el.target);
-      }
+  /* ── Reveal on scroll ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // FAQ
+  /* ── FAQ ── */
   function toggleFaq(btn) {
-    const item = btn.parentElement;
-    const answer = item.querySelector('.faq-a');
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
     const isOpen = item.classList.contains('open');
-
-    document.querySelectorAll('.faq-item').forEach(i => {
+    document.querySelectorAll('.faq-item.open').forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = null;
+      i.querySelector('.faq-answer').style.maxHeight = null;
     });
-
     if (!isOpen) {
       item.classList.add('open');
       answer.style.maxHeight = answer.scrollHeight + 'px';
     }
+  }
+
+  /* ── Mobile menu ── */
+  function openMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  /* ── Parallax interlude ── */
+  const interludeBg = document.querySelector('.interlude-bg');
+  if (interludeBg) {
+    window.addEventListener('scroll', () => {
+      const rect = interludeBg.parentElement.getBoundingClientRect();
+      const offset = rect.top / window.innerHeight;
+      interludeBg.style.transform = `translateY(${offset * 40}px)`;
+    }, { passive: true });
   }
 </script>
 </body>
