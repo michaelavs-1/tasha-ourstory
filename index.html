@@ -944,6 +944,20 @@
       .hero-actions { flex-direction: column; align-items: center; }
       .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
       .pricing-card { padding: 32px 20px; }
+      .hero-scroll { display: none; }
+    }
+
+    /* ── iOS: parallax fallback ── */
+    @supports (-webkit-overflow-scrolling: touch) {
+      .interlude-bg { background-attachment: scroll; }
+    }
+    @media (max-width: 768px) {
+      .interlude-bg { background-attachment: scroll; }
+      .hero-scroll { bottom: 1.2rem; }
+      .hero-content { padding-bottom: 80px; }
+      .hero-title .line-inner { animation: none; opacity: 1; transform: none; }
+      .hero-eyebrow { animation: none; opacity: 1; transform: none; }
+      .hero-sub, .hero-actions { animation: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
