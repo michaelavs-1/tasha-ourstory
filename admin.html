@@ -114,9 +114,9 @@
 <div id="loginView">
   <div class="login-card">
     <h1>OUR STORY · ניהול</h1>
-    <p>כדי להתחבר, הדבק את מפתח הגישה (GitHub token) שקיבלת. המפתח נשמר רק בדפדפן הזה.</p>
-    <input id="tokIn" type="password" placeholder="github_pat_..." autocomplete="off">
-    <div class="login-err" id="logErr">המפתח לא תקין או שאין לו הרשאה. נסה שוב.</div>
+    <p>הזן סיסמה כדי להיכנס למערכת הניהול.</p>
+    <input id="tokIn" type="password" placeholder="סיסמה" autocomplete="off" style="text-align:center;direction:rtl">
+    <div class="login-err" id="logErr">סיסמה שגויה. נסה שוב.</div>
     <button class="btn" onclick="doLogin()">כניסה</button>
   </div>
 </div>
@@ -209,16 +209,30 @@ function stripTags(html){const d=document.createElement('div');d.innerHTML=html;
   return (d.textContent||'').replace(/\s+/g,' ').trim();}
 
 /* ═══════════ auth ═══════════ */
+const VAULT={salt:'Cg5Sh2gEkGpPRw3Fzjb++g==',iv:'bJZNwhVIKFLkKteA',
+  ct:'4Sve/NZ7c9txnUqZIe/ZlLyF4/kXvIL2YrXAptE5f8/9YMSazZe9KchHTf6Z/o85TVU0icvxYeXNPiPCMtFS1cwueMT7UguodzKPTA2eCV4JUd6qEjPyW/JLnNroWx9eHDqbMhREqNrUVGLmTA=='};
+const b64b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function unlock(pw){
+  const enc=new TextEncoder();
+  const km=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey(
+    {name:'PBKDF2',salt:b64b(VAULT.salt),iterations:600000,hash:'SHA-256'},
+    km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64b(VAULT.iv)},key,b64b(VAULT.ct));
+  return new TextDecoder().decode(pt);
+}
 async function validateToken(t){
   try{const r=await fetch('https://api.github.com/repos/'+REPO,
     {headers:{'Authorization':'Bearer '+t,'Accept':'application/vnd.github+json'}});
     return r.ok;}catch(e){return false;}
 }
 async function doLogin(){
-  const t=$('tokIn').value.trim();
-  if(!t)return;
+  const v=$('tokIn').value.trim();
+  if(!v)return;
   $('logErr').style.display='none';
-  if(await validateToken(t)){token=t;localStorage.setItem(LS.tok,t);boot();}
+  // accept either the password or a raw GitHub token (fallback)
+  let t=v.startsWith('github_pat_')?v:await unlock(v).catch(()=>null);
+  if(t&&await validateToken(t)){token=t;localStorage.setItem(LS.tok,t);boot();}
   else $('logErr').style.display='block';
 }
 function logout(){localStorage.removeItem(LS.tok);location.reload();}
