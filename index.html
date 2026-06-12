@@ -998,6 +998,10 @@
       .occ { padding: 11px 20px; font-size: 0.88rem; }
       .lang-btn { margin-inline-start: 0; margin-inline-end: 1rem; }
     }
+
+    /* keep hero eyebrow clear of the nav on short screens */
+    .hero-content { padding-top: 92px; }
+    @media (max-width: 768px) { .hero-content { padding-top: 76px; } }
 </style>
 </head>
 <body>
