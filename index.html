@@ -1465,6 +1465,30 @@
     }
   }
 })();
-</script><script async="" data-goatcounter="https://tasha-ourstory.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+</script><script id="ph-slot">/* POSTHOG_DISABLED */</script>
+<script id="pixel-slot">/* PIXEL_DISABLED */</script>
+<script>
+(function(){
+  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,10);}
+  function capi(name,id){
+    try{navigator.sendBeacon('/api/capi',new Blob([JSON.stringify({event_name:name,event_id:id,url:location.href})],{type:'application/json'}));}catch(e){}
+  }
+  window.__pvId=uid();
+  window.addEventListener('load',function(){capi('PageView',window.__pvId);});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a,button');if(!a)return;
+    var text=(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,80);
+    var href=a.getAttribute('href')||'';
+    var sec=(a.closest('section,nav,footer,div[id]')||{}).id||'';
+    if(window.posthog&&posthog.capture)posthog.capture('site_click',{text:text,href:href,section:sec});
+    if(/wa\.me/.test(href)){
+      var id=uid();
+      if(window.posthog&&posthog.capture)posthog.capture('whatsapp_click',{text:text,section:sec});
+      if(window.fbq)fbq('track','Contact',{},{eventID:id});
+      capi('Contact',id);
+    }
+  },true);
+})();
+</script>
 </body>
 </html>

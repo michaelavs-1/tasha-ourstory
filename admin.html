@@ -17,54 +17,49 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Heebo',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
   button{font-family:inherit;cursor:pointer}
-  input{font-family:inherit}
+  input,select{font-family:inherit}
 
-  /* ── top bar ── */
   .topbar{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--cream);
     display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;flex-wrap:wrap}
   .topbar .brand{font-weight:700;letter-spacing:.08em}
   .topbar .brand small{color:var(--gold-light);font-weight:300;margin-inline-start:.5rem}
-  .tabs{display:flex;gap:.25rem}
+  .tabs{display:flex;gap:.25rem;flex-wrap:wrap}
   .tab{background:none;border:none;color:rgba(250,247,242,.65);padding:.45rem .9rem;border-radius:6px;font-size:.95rem}
   .tab.active{background:rgba(196,149,106,.25);color:#fff}
   .spacer{flex:1}
-  .badge{background:var(--gold);color:#fff;border-radius:999px;padding:.05rem .55rem;font-size:.8rem;margin-inline-start:.35rem}
   .btn{border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.95rem;font-weight:500}
   .btn-pub{background:var(--gold);color:#fff}
   .btn-pub:disabled{background:#666;opacity:.5;cursor:not-allowed}
   .btn-ghost{background:transparent;color:rgba(250,247,242,.7);border:1px solid rgba(250,247,242,.25)}
   .btn-ghost:disabled{opacity:.35;cursor:not-allowed}
+  .btn-dark{background:var(--ink);color:#fff}
 
-  /* ── views ── */
   .view{display:none}
   .view.active{display:block}
 
-  /* ── login ── */
   #loginView{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--warm)}
   .login-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:2.5rem;max-width:430px;width:92%;box-shadow:0 12px 40px rgba(17,14,11,.08)}
   .login-card h1{font-size:1.4rem;margin-bottom:.4rem}
   .login-card p{color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.2rem}
-  .login-card input{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;font-size:.9rem;direction:ltr;text-align:left}
+  .login-card input{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;font-size:.95rem;text-align:center}
   .login-card .btn{width:100%;margin-top:1rem;background:var(--ink);color:#fff;padding:.75rem}
   .login-err{color:var(--err);font-size:.85rem;margin-top:.7rem;display:none}
 
-  /* ── editor ── */
   #editorView .frame-wrap{height:calc(100vh - 56px)}
   #siteFrame{width:100%;height:100%;border:none;background:#fff}
   .hint{background:var(--warm);border-bottom:1px solid var(--border);color:var(--ink-soft);
     font-size:.85rem;padding:.45rem 1.2rem;display:flex;gap:.6rem;align-items:center}
   .hint b{color:var(--gold-dim)}
 
-  /* ── dashboard ── */
-  #dashView{max-width:1100px;margin:0 auto;padding:1.6rem 1.2rem 4rem}
+  .wrap{max-width:1100px;margin:0 auto;padding:1.6rem 1.2rem 4rem}
   .dash-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;flex-wrap:wrap}
   .dash-head h2{font-size:1.3rem;font-weight:700}
   .seg{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
   .seg button{background:#fff;border:none;padding:.4rem .9rem;font-size:.85rem;color:var(--muted)}
   .seg button.on{background:var(--ink);color:#fff}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.4rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.4rem}
   .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem}
-  .card .num{font-size:2rem;font-weight:700;color:var(--gold-dim)}
+  .card .num{font-size:1.9rem;font-weight:700;color:var(--gold-dim)}
   .card .lbl{color:var(--muted);font-size:.85rem;margin-top:.15rem}
   .panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1.2rem}
   .panel h3{font-size:1rem;margin-bottom:.9rem;color:var(--ink-soft)}
@@ -72,35 +67,33 @@
   .chart .bar{flex:1;background:var(--gold-light);border-radius:3px 3px 0 0;min-height:2px;position:relative}
   .chart .bar:hover{background:var(--gold-dim)}
   .chart .bar .tip{display:none;position:absolute;bottom:100%;right:50%;transform:translateX(50%);
-    background:var(--ink);color:#fff;font-size:.7rem;padding:.15rem .45rem;border-radius:4px;white-space:nowrap;margin-bottom:4px}
+    background:var(--ink);color:#fff;font-size:.7rem;padding:.15rem .45rem;border-radius:4px;white-space:nowrap;margin-bottom:4px;z-index:5}
   .chart .bar:hover .tip{display:block}
   .rowlist .row{display:flex;align-items:center;gap:.8rem;padding:.4rem 0;border-bottom:1px solid var(--warm);font-size:.88rem}
   .rowlist .row:last-child{border-bottom:none}
-  .rowlist .name{flex:1;direction:ltr;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rowlist .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rowlist .name.ltr{direction:ltr;text-align:left}
   .rowlist .cnt{color:var(--gold-dim);font-weight:600;min-width:3.2rem;text-align:left;direction:ltr}
-  .rowlist .meter{height:5px;background:var(--warm);border-radius:3px;flex:1;max-width:180px}
+  .rowlist .meter{height:5px;background:var(--warm);border-radius:3px;flex:1;max-width:160px}
   .rowlist .meter i{display:block;height:100%;background:var(--gold);border-radius:3px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
   @media(max-width:760px){.grid2{grid-template-columns:1fr}}
-  .setup{max-width:560px;margin:2rem auto;background:#fff;border:1px solid var(--border);border-radius:14px;padding:2rem}
+  .setup{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.8rem;margin-bottom:1.4rem}
   .setup h3{margin-bottom:.8rem}
   .setup ol{padding-inline-start:1.2rem;color:var(--ink-soft);font-size:.92rem;line-height:1.9;margin-bottom:1.2rem}
-  .setup input{width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;margin-bottom:.7rem;direction:ltr;text-align:left;font-size:.88rem}
+  .setup input,.setup select{width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;margin-bottom:.7rem;direction:ltr;text-align:left;font-size:.88rem;background:#fff}
   .setup label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.25rem}
-  .setup .btn{background:var(--ink);color:#fff}
   .note{background:var(--warm);border-radius:8px;padding:.7rem .9rem;font-size:.84rem;color:var(--ink-soft);line-height:1.6;margin-bottom:1rem}
-  .errbox{background:#fdf0ef;border:1px solid #e8c8c4;color:#8a3a32;border-radius:10px;padding:.9rem 1.1rem;font-size:.9rem;line-height:1.7;margin-bottom:1.2rem;display:none}
+  .errbox{background:#fdf0ef;border:1px solid #e8c8c4;color:#8a3a32;border-radius:10px;padding:.9rem 1.1rem;font-size:.9rem;line-height:1.7;margin-bottom:1.2rem}
+  .okbox{background:#eef7f0;border:1px solid #cae3cf;color:#2c5e3a;border-radius:10px;padding:.9rem 1.1rem;font-size:.9rem;line-height:1.7;margin-bottom:1.2rem}
   .linkout{color:var(--gold-dim)}
+  .pill{display:inline-block;background:var(--warm);border-radius:999px;padding:.1rem .7rem;font-size:.78rem;color:var(--ink-soft);margin-inline-start:.5rem}
+  .pill.on{background:#e3f1e6;color:#2c5e3a}
+  code{background:var(--warm);border-radius:5px;padding:.1rem .4rem;font-size:.82em;direction:ltr;display:inline-block}
 
-  /* ── settings ── */
-  #setView{max-width:560px;margin:2rem auto;padding:0 1.2rem 4rem}
-
-  /* ── toast ── */
   #toast{position:fixed;bottom:1.4rem;right:50%;transform:translateX(50%);background:var(--ink);color:#fff;
     padding:.7rem 1.4rem;border-radius:10px;font-size:.92rem;display:none;z-index:99;box-shadow:0 8px 30px rgba(0,0,0,.25)}
   #toast.ok{background:var(--ok)} #toast.err{background:var(--err)}
-
-  /* ── publish overlay ── */
   #pubOverlay{position:fixed;inset:0;background:rgba(17,14,11,.55);display:none;align-items:center;justify-content:center;z-index:90}
   #pubOverlay .box{background:#fff;border-radius:14px;padding:2rem 2.4rem;text-align:center;max-width:340px}
   .spin{width:34px;height:34px;border:3px solid var(--warm);border-top-color:var(--gold);border-radius:50%;
@@ -115,7 +108,7 @@
   <div class="login-card">
     <h1>OUR STORY · ניהול</h1>
     <p>הזן סיסמה כדי להיכנס למערכת הניהול.</p>
-    <input id="tokIn" type="password" placeholder="סיסמה" autocomplete="off" style="text-align:center;direction:rtl">
+    <input id="tokIn" type="password" placeholder="סיסמה" autocomplete="off">
     <div class="login-err" id="logErr">סיסמה שגויה. נסה שוב.</div>
     <button class="btn" onclick="doLogin()">כניסה</button>
   </div>
@@ -126,9 +119,10 @@
   <div class="topbar">
     <span class="brand">OUR STORY<small>ניהול</small></span>
     <div class="tabs">
-      <button class="tab active" data-v="editorView" onclick="showTab(this)">עריכת האתר</button>
-      <button class="tab" data-v="dashView" onclick="showTab(this)">אנליטיקס</button>
-      <button class="tab" data-v="setView" onclick="showTab(this)">הגדרות</button>
+      <button class="tab active" data-v="dashView" onclick="showTab(this)">📊 סטטיסטיקות</button>
+      <button class="tab" data-v="editorView" onclick="showTab(this)">✏️ עריכת האתר</button>
+      <button class="tab" data-v="mktView" onclick="showTab(this)">🎯 שיווק</button>
+      <button class="tab" data-v="setView" onclick="showTab(this)">⚙️ הגדרות</button>
     </div>
     <div class="spacer"></div>
     <span id="chgCount" style="font-size:.85rem;color:rgba(250,247,242,.6)"></span>
@@ -136,48 +130,20 @@
     <button class="btn btn-pub" id="pubBtn" onclick="publish()" disabled>פרסם ✦</button>
   </div>
 
+  <!-- ── DASHBOARD ── -->
+  <div class="view active" id="dashView"><div class="wrap" id="dashWrap"></div></div>
+
   <!-- ── EDITOR ── -->
-  <div class="view active" id="editorView">
+  <div class="view" id="editorView">
     <div class="hint">✏️ <span>לחץ על כל טקסט באתר כדי לערוך אותו ישירות. בסיום — <b>פרסם</b>. השינויים יעלו לאוויר תוך כחצי דקה.</span></div>
     <div class="frame-wrap"><iframe id="siteFrame"></iframe></div>
   </div>
 
-  <!-- ── DASHBOARD ── -->
-  <div class="view" id="dashView"></div>
+  <!-- ── MARKETING ── -->
+  <div class="view" id="mktView"><div class="wrap" id="mktWrap"></div></div>
 
   <!-- ── SETTINGS ── -->
-  <div class="view" id="setView">
-    <div class="setup" style="margin-top:0">
-      <h3>מפתח GitHub</h3>
-      <div class="note">המפתח משמש לפרסום שינויים. תוקפו מוגבל — כשהוא פג, צור חדש ב-GitHub (Settings → Developer settings → Fine-grained tokens) והדבק כאן.</div>
-      <label>Token</label>
-      <input id="setTok" type="password" placeholder="github_pat_...">
-      <button class="btn" onclick="saveTok()">עדכן מפתח</button>
-      <button class="btn" style="background:transparent;color:var(--err);margin-inline-start:.5rem" onclick="logout()">התנתק</button>
-    </div>
-    <div class="setup">
-      <h3>חיבור אנליטיקס (GoatCounter)</h3>
-      <div class="note">שירות חינמי למעקב תנועה, בלי עוגיות ובלי באנרים. ההגדרה חד-פעמית.</div>
-      <ol>
-        <li>הירשם ב-<a class="linkout" href="https://www.goatcounter.com/signup" target="_blank">goatcounter.com/signup</a> ובחר בכתובת: <b>tasha-ourstory</b></li>
-        <li>בתוך GoatCounter: Settings → API → New API key (הרשאת Read statistics)</li>
-        <li>הדבק את הפרטים כאן:</li>
-      </ol>
-      <label>קוד האתר (Site code)</label>
-      <input id="gcCode" placeholder="tasha-ourstory">
-      <label>API key</label>
-      <input id="gcTok" type="password" placeholder="...">
-      <button class="btn" onclick="saveGC()">שמור</button>
-    </div>
-    <div class="setup">
-      <h3>קישורים</h3>
-      <div class="rowlist">
-        <div class="row"><span>האתר החי</span><a class="name linkout" href="/" target="_blank">tasha-ourstory.vercel.app</a></div>
-        <div class="row"><span>GitHub</span><a class="name linkout" href="https://github.com/michaelavs-1/tasha-ourstory" target="_blank">michaelavs-1/tasha-ourstory</a></div>
-        <div class="row"><span>Vercel</span><a class="name linkout" href="https://vercel.com/michaelavs-1s-projects" target="_blank">vercel.com</a></div>
-      </div>
-    </div>
-  </div>
+  <div class="view" id="setView"><div class="wrap" id="setWrap"></div></div>
 </div>
 
 <div id="pubOverlay"><div class="box"><div class="spin"></div><div id="pubMsg">מפרסם…</div></div></div>
@@ -188,15 +154,14 @@
 /* ═══════════ config ═══════════ */
 const REPO='michaelavs-1/tasha-ourstory', BRANCH='main', FILE='index.html';
 const API='https://api.github.com/repos/'+REPO+'/contents/'+FILE;
-const LS={tok:'os_admin_token', gcCode:'os_gc_code', gcTok:'os_gc_token'};
-
+const LS={tok:'os_admin_token',phRegion:'os_ph_region',phProj:'os_ph_proj',phKey:'os_ph_key',phPub:'os_ph_pub',pixel:'os_meta_pixel'};
 let token=localStorage.getItem(LS.tok)||'';
 let changes={}, originals={};
 
 /* ═══════════ helpers ═══════════ */
 const $=id=>document.getElementById(id);
 function toast(msg,cls){const t=$('toast');t.textContent=msg;t.className=cls||'';t.style.display='block';
-  clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',3500);}
+  clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',4000);}
 function gh(url,opt={}){opt.headers=Object.assign({'Authorization':'Bearer '+token,
   'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},opt.headers||{});
   return fetch(url,opt);}
@@ -207,8 +172,11 @@ function b64encode(str){const bytes=new TextEncoder().encode(str);let bin='';
   return btoa(bin);}
 function stripTags(html){const d=document.createElement('div');d.innerHTML=html;
   return (d.textContent||'').replace(/\s+/g,' ').trim();}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function fmtDur(sec){if(sec==null||isNaN(sec))return'—';sec=Math.round(sec);
+  return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');}
 
-/* ═══════════ auth ═══════════ */
+/* ═══════════ auth (password vault) ═══════════ */
 const VAULT={salt:'Cg5Sh2gEkGpPRw3Fzjb++g==',iv:'bJZNwhVIKFLkKteA',
   ct:'4Sve/NZ7c9txnUqZIe/ZlLyF4/kXvIL2YrXAptE5f8/9YMSazZe9KchHTf6Z/o85TVU0icvxYeXNPiPCMtFS1cwueMT7UguodzKPTA2eCV4JUd6qEjPyW/JLnNroWx9eHDqbMhREqNrUVGLmTA=='};
 const b64b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
@@ -230,28 +198,23 @@ async function doLogin(){
   const v=$('tokIn').value.trim();
   if(!v)return;
   $('logErr').style.display='none';
-  // accept either the password or a raw GitHub token (fallback)
   let t=v.startsWith('github_pat_')?v:await unlock(v).catch(()=>null);
   if(t&&await validateToken(t)){token=t;localStorage.setItem(LS.tok,t);boot();}
   else $('logErr').style.display='block';
 }
 function logout(){localStorage.removeItem(LS.tok);location.reload();}
-function saveTok(){const t=$('setTok').value.trim();if(!t)return;
-  validateToken(t).then(ok=>{if(ok){token=t;localStorage.setItem(LS.tok,t);$('setTok').value='';toast('המפתח עודכן ✓','ok');}
-  else toast('המפתח לא תקין','err');});}
 
 /* ═══════════ tabs ═══════════ */
 function showTab(btn){
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));
   document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===btn.dataset.v));
   if(btn.dataset.v==='dashView')renderDash();
+  if(btn.dataset.v==='mktView')renderMkt();
+  if(btn.dataset.v==='setView')renderSet();
 }
 
-/* ═══════════ editor ═══════════ */
-function loadFrame(){
-  $('siteFrame').src='/?_admin='+Date.now();
-}
-$('siteFrame')&&0;
+/* ═══════════ visual editor ═══════════ */
+function loadFrame(){$('siteFrame').src='/?_admin='+Date.now();}
 function injectEditor(){
   const f=$('siteFrame'), d=f.contentDocument;
   if(!d)return;
@@ -260,7 +223,7 @@ function injectEditor(){
     [data-edit]{outline:1px dashed rgba(196,149,106,.55);outline-offset:3px;cursor:text;transition:background .15s}
     [data-edit]:hover{background:rgba(196,149,106,.12)}
     [data-edit]:focus{outline:2px solid #C4956A;background:rgba(255,255,255,.65);color:inherit}
-    section#process [data-edit]:focus,#interlude [data-edit]:focus,#pricing [data-edit]:focus,#opening [data-edit]:focus{background:rgba(0,0,0,.35)}
+    section#process [data-edit]:focus,#interlude [data-edit]:focus,.pricing-card [data-edit]:focus,#opening [data-edit]:focus{background:rgba(0,0,0,.35)}
     .reveal{opacity:1!important;transform:none!important;transition:none!important}
     .faq-answer{max-height:none!important}
     .faq-plus{display:none!important}
@@ -281,7 +244,6 @@ function injectEditor(){
       updateBar();
     });
   });
-  // block navigation & accordion toggling while editing
   d.addEventListener('click',e=>{
     if(e.target.closest('a,button,.burger,.hero-scroll')){e.preventDefault();e.stopPropagation();}
   },true);
@@ -300,138 +262,269 @@ window.addEventListener('beforeunload',e=>{
   if(Object.keys(changes).length){e.preventDefault();e.returnValue='';}
 });
 
-/* ═══════════ publish ═══════════ */
-async function publish(){
-  const keys=Object.keys(changes);
-  if(!keys.length)return;
-  if(!confirm('לפרסם '+keys.length+' שינויים לאתר החי?'))return;
+/* ═══════════ publish engine (shared) ═══════════ */
+async function commitSite(mutator,message,probeText){
   const ov=$('pubOverlay'),msg=$('pubMsg');
   ov.style.display='flex';msg.textContent='מוריד את הגרסה הנוכחית…';
   try{
     const r=await gh(API+'?ref='+BRANCH);
-    if(!r.ok)throw new Error('GitHub: '+r.status);
+    if(!r.ok)throw new Error('GitHub '+r.status);
     const j=await r.json();
-    const src=b64decode(j.content);
-    const doc=new DOMParser().parseFromString(src,'text/html');
-    let missed=[];
-    keys.forEach(k=>{
-      const el=doc.querySelector('[data-edit="'+k+'"]');
-      if(el)el.innerHTML=changes[k];else missed.push(k);
-    });
-    if(missed.length&&!confirm(missed.length+' אלמנטים לא נמצאו בקובץ (ייתכן שהאתר עודכן במקביל). להמשיך בכל זאת?'))
-      {ov.style.display='none';return;}
+    const doc=new DOMParser().parseFromString(b64decode(j.content),'text/html');
+    mutator(doc);
     msg.textContent='שומר ל-GitHub…';
     const out='<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
     const put=await gh(API,{method:'PUT',body:JSON.stringify({
-      message:'עדכון תוכן דרך מערכת הניהול',content:b64encode(out),sha:j.sha,branch:BRANCH})});
-    if(!put.ok){const e=await put.json().catch(()=>({}));throw new Error('GitHub: '+put.status+' '+(e.message||''));}
-    // wait for vercel deploy
+      message,content:b64encode(out),sha:j.sha,branch:BRANCH})});
+    if(!put.ok){const e=await put.json().catch(()=>({}));throw new Error('GitHub '+put.status+' '+(e.message||''));}
     msg.textContent='האתר מתעדכן… (כחצי דקה)';
-    const probe=stripTags(changes[keys[0]]).slice(0,60);
     let live=false;
-    for(let i=0;i<24;i++){
+    for(let i=0;i<20;i++){
       await new Promise(s=>setTimeout(s,5000));
       try{const t=await fetch('/?_c='+Date.now(),{cache:'no-store'}).then(x=>x.text());
-        if(stripTags(t).includes(probe)){live=true;break;}}catch(e){}
+        if(!probeText||t.includes(probeText)){live=true;if(probeText)break;if(i>=5)break;}}catch(e){}
       msg.textContent='האתר מתעדכן… ('+((i+1)*5)+' שניות)';
     }
     ov.style.display='none';
+    return live;
+  }catch(err){ov.style.display='none';throw err;}
+}
+async function publish(){
+  const keys=Object.keys(changes);
+  if(!keys.length)return;
+  if(!confirm('לפרסם '+keys.length+' שינויים לאתר החי?'))return;
+  const probe=stripTags(changes[keys[0]]).slice(0,50);
+  try{
+    let missed=[];
+    await commitSite(doc=>{
+      keys.forEach(k=>{
+        const el=doc.querySelector('[data-edit="'+k+'"]');
+        if(el)el.innerHTML=changes[k];else missed.push(k);
+      });
+    },'עדכון תוכן דרך מערכת הניהול',null);
     changes={};updateBar();loadFrame();
-    toast(live?'פורסם! האתר מעודכן ✓':'נשמר ✓ — האתר יתעדכן בדקות הקרובות','ok');
-  }catch(err){
-    ov.style.display='none';
-    toast('שגיאה בפרסום: '+err.message,'err');
-  }
+    toast('פורסם! ✓','ok');
+  }catch(err){toast('שגיאה בפרסום: '+err.message,'err');}
 }
 
-/* ═══════════ analytics ═══════════ */
+/* ═══════════ PostHog analytics ═══════════ */
 const PERIODS=[{d:7,l:'7 ימים'},{d:30,l:'30 יום'},{d:90,l:'90 יום'}];
 let period=30;
-function gcConf(){return{code:localStorage.getItem(LS.gcCode)||'',tok:localStorage.getItem(LS.gcTok)||''};}
-function saveGC(){
-  const c=$('gcCode').value.trim(),t=$('gcTok').value.trim();
-  if(!c||!t){toast('יש למלא את שני השדות','err');return;}
-  localStorage.setItem(LS.gcCode,c);localStorage.setItem(LS.gcTok,t);
-  toast('נשמר ✓','ok');
-  document.querySelector('[data-v="dashView"]').click();
+function phConf(){return{
+  region:localStorage.getItem(LS.phRegion)||'us',
+  proj:localStorage.getItem(LS.phProj)||'',
+  key:localStorage.getItem(LS.phKey)||'',
+  pub:localStorage.getItem(LS.phPub)||''};}
+function phHost(r){return r==='eu'?'https://eu.posthog.com':'https://us.posthog.com';}
+async function phq(sql){
+  const c=phConf();
+  const r=await fetch(phHost(c.region)+'/api/projects/'+c.proj+'/query/',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+c.key},
+    body:JSON.stringify({query:{kind:'HogQLQuery',query:sql}})});
+  if(!r.ok)throw new Error('PostHog '+r.status);
+  const j=await r.json();return j.results||[];
 }
-async function gcFetch(path){
-  const{code,tok}=gcConf();
-  const r=await fetch('https://'+code+'.goatcounter.com/api/v0'+path,
-    {headers:{'Authorization':'Bearer '+tok}});
-  if(!r.ok)throw new Error('API '+r.status);
-  return r.json();
+function listHTML(arr,opts={}){
+  if(!arr||!arr.length)return'<div style="color:var(--muted);font-size:.85rem">אין נתונים עדיין</div>';
+  const mx=Math.max(...arr.map(x=>x[1]||0),1);
+  return '<div class="rowlist">'+arr.map(x=>{
+    let nm=x[0]==null||x[0]===''?'(לא ידוע)':x[0];
+    return`<div class="row"><span class="name ${opts.ltr?'ltr':''}" title="${esc(nm)}">${esc(nm)}</span>
+      <span class="meter"><i style="width:${Math.round((x[1]||0)/mx*100)}%"></i></span>
+      <span class="cnt">${(x[1]||0).toLocaleString()}</span></div>`;}).join('')+'</div>';
 }
-function dstr(d){return d.toISOString().slice(0,10);}
 async function renderDash(){
-  const v=$('dashView');
-  const{code,tok}=gcConf();
-  if(!code||!tok){
-    v.innerHTML=`<div class="setup"><h3>📊 חיבור אנליטיקס</h3>
-      <div class="note">כדי לראות נתוני תנועה, צריך להגדיר חיבור חד-פעמי ל-GoatCounter (חינמי). ההגדרה נמצאת בטאב <b>הגדרות</b>.</div>
-      <button class="btn" onclick="document.querySelector('[data-v=setView]').click()">לעמוד ההגדרות ←</button></div>`;
+  const w=$('dashWrap');
+  const c=phConf();
+  if(!c.proj||!c.key){
+    w.innerHTML=`<div class="setup"><h3>📊 הפעלת מדידת נתונים</h3>
+      <div class="note">המערכת מודדת כניסות, מבקרים, הקלקות על כל כפתור, זמן שהייה, מדינות ומכשירים — באמצעות PostHog (חינמי עד מיליון אירועים בחודש, ללא צורך בבאנר עוגיות במצב הזה).</div>
+      <ol>
+        <li>צור חשבון חינמי: <a class="linkout" href="https://us.posthog.com/signup" target="_blank">us.posthog.com/signup</a> (בחר Web)</li>
+        <li>אחרי ההרשמה: Settings → Project → העתק את <b>Project API Key</b> (מתחיל ב-<code>phc_</code>) ואת <b>Project ID</b> (מספר)</li>
+        <li>צור מפתח קריאה: לחץ על האווטאר → Personal API Keys → Create (הרשאת <b>Query Read</b>) — מתחיל ב-<code>phx_</code></li>
+        <li>הדבק הכול בטאב <b>הגדרות</b> ולחץ "שמור והפעל מעקב"</li>
+      </ol>
+      <button class="btn btn-dark" onclick="document.querySelector('[data-v=setView]').click()">לעמוד ההגדרות ←</button></div>`;
     return;
   }
-  v.innerHTML=`<div class="dash-head"><h2>📊 תנועה באתר</h2>
+  w.innerHTML=`<div class="dash-head"><h2>📊 סטטיסטיקות האתר</h2>
     <div class="seg">${PERIODS.map(p=>`<button class="${p.d===period?'on':''}" onclick="period=${p.d};renderDash()">${p.l}</button>`).join('')}</div>
     <div class="spacer"></div>
-    <a class="linkout" style="font-size:.85rem" href="https://${code}.goatcounter.com" target="_blank">דשבורד מלא ↗</a></div>
+    <a class="linkout" style="font-size:.85rem" href="${phHost(c.region)}/project/${c.proj}" target="_blank">PostHog המלא ↗</a></div>
     <div id="dashBody">טוען נתונים…</div>`;
-  const end=new Date(),start=new Date(Date.now()-period*864e5);
-  const q='?start='+dstr(start)+'&end='+dstr(end);
-  const body=$('dashBody');
+  const N=period, body=$('dashBody');
+  const since=`timestamp > now() - interval ${N} day`;
   try{
-    const[total,hits]=await Promise.all([
-      gcFetch('/stats/total'+q),
-      gcFetch('/stats/hits'+q+'&limit=10')
-    ]);
-    // optional extras — don't fail the whole dash if these error
-    const safe=p=>gcFetch(p).catch(()=>null);
-    const[refs,browsers,locs,sizes]=await Promise.all([
-      safe('/stats/toprefs'+q+'&limit=8'),safe('/stats/browsers'+q+'&limit=6'),
-      safe('/stats/locations'+q+'&limit=8'),safe('/stats/sizes'+q)
-    ]);
-    // daily series from hits[].stats
-    const days={};
-    (hits.hits||[]).forEach(h=>(h.stats||[]).forEach(s=>{
-      days[s.day]=(days[s.day]||0)+(s.daily!==undefined?s.daily:(s.count||0));}));
-    const dayKeys=[];for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1))dayKeys.push(dstr(d));
-    const maxDay=Math.max(1,...dayKeys.map(k=>days[k]||0));
-    const totalViews=total.total!==undefined?total.total:'—';
-    const totalUnique=total.total_utc!==undefined?total.total_utc:(total.total_unique!==undefined?total.total_unique:null);
-    const avg=typeof totalViews==='number'?Math.round(totalViews/period*10)/10:'—';
-    const topPage=(hits.hits||[])[0];
-    const listHTML=(arr,nameKey)=>{
-      if(!arr||!arr.length)return'<div style="color:var(--muted);font-size:.85rem">אין נתונים עדיין</div>';
-      const mx=Math.max(...arr.map(x=>x.count||0),1);
-      return '<div class="rowlist">'+arr.map(x=>{
-        let nm=x[nameKey]||x.name||x.path||x.id||'—';if(nm==='')nm='(ישיר / ללא מקור)';
-        return`<div class="row"><span class="name" title="${nm}">${nm}</span>
-          <span class="meter"><i style="width:${Math.round((x.count||0)/mx*100)}%"></i></span>
-          <span class="cnt">${(x.count||0).toLocaleString()}</span></div>`;}).join('')+'</div>';
+    const Q={
+      pv:`select count() from events where event='$pageview' and ${since}`,
+      vis:`select count(distinct distinct_id) from events where event='$pageview' and ${since}`,
+      clicks:`select count() from events where event='site_click' and ${since}`,
+      wa:`select count() from events where event='whatsapp_click' and ${since}`,
+      dur:`select avg(dateDiff('second',mn,mx)) from (select properties.$session_id as s, min(timestamp) as mn, max(timestamp) as mx from events where ${since} and properties.$session_id is not null group by s having dateDiff('second',mn,mx) between 1 and 7200)`,
+      daily:`select toDate(timestamp) as d, count() from events where event='$pageview' and ${since} group by d order by d`,
+      topClicks:`select properties.text as t, count() as c from events where event='site_click' and ${since} group by t order by c desc limit 10`,
+      countries:`select properties.$geoip_country_name as c, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by c order by n desc limit 8`,
+      devices:`select properties.$device_type as t, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by t order by n desc limit 5`,
+      langs:`select properties.$browser_language as l, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by l order by n desc limit 6`
     };
+    const [pv,vis,clicks,wa,dur,daily,topClicks,countries,devices,langs]=await Promise.all([
+      phq(Q.pv),phq(Q.vis),phq(Q.clicks),phq(Q.wa),
+      phq(Q.dur).catch(()=>[[null]]),phq(Q.daily),
+      phq(Q.topClicks).catch(()=>[]),phq(Q.countries).catch(()=>[]),
+      phq(Q.devices).catch(()=>[]),phq(Q.langs).catch(()=>[])
+    ]);
+    const days={};(daily||[]).forEach(r=>{days[String(r[0])]=r[1];});
+    const dayKeys=[];const end=new Date();
+    for(let d=new Date(Date.now()-(N-1)*864e5);d<=end;d.setDate(d.getDate()+1))dayKeys.push(d.toISOString().slice(0,10));
+    const maxDay=Math.max(1,...dayKeys.map(k=>days[k]||0));
     body.innerHTML=`
       <div class="cards">
-        <div class="card"><div class="num">${typeof totalViews==='number'?totalViews.toLocaleString():totalViews}</div><div class="lbl">צפיות בעמוד</div></div>
-        ${totalUnique!==null?`<div class="card"><div class="num">${totalUnique.toLocaleString()}</div><div class="lbl">מבקרים</div></div>`:''}
-        <div class="card"><div class="num">${avg}</div><div class="lbl">צפיות ביום (ממוצע)</div></div>
-        <div class="card"><div class="num" style="font-size:1.1rem;padding-top:.5rem">${topPage?(topPage.path||topPage.name||'/'):'—'}</div><div class="lbl">העמוד הפופולרי</div></div>
+        <div class="card"><div class="num">${(pv[0][0]||0).toLocaleString()}</div><div class="lbl">צפיות בעמוד</div></div>
+        <div class="card"><div class="num">${(vis[0][0]||0).toLocaleString()}</div><div class="lbl">מבקרים</div></div>
+        <div class="card"><div class="num">${fmtDur(dur[0]&&dur[0][0])}</div><div class="lbl">זמן שהייה ממוצע</div></div>
+        <div class="card"><div class="num">${(clicks[0][0]||0).toLocaleString()}</div><div class="lbl">הקלקות</div></div>
+        <div class="card"><div class="num">${(wa[0][0]||0).toLocaleString()}</div><div class="lbl">פניות WhatsApp</div></div>
       </div>
       <div class="panel"><h3>צפיות לפי יום</h3>
         <div class="chart">${dayKeys.map(k=>`<div class="bar" style="height:${Math.round((days[k]||0)/maxDay*100)}%"><span class="tip">${k.slice(5)}: ${days[k]||0}</span></div>`).join('')}</div>
       </div>
       <div class="grid2">
-        <div class="panel"><h3>עמודים נצפים</h3>${listHTML(hits.hits,'path')}</div>
-        <div class="panel"><h3>מקורות תנועה</h3>${listHTML(refs&&(refs.top||refs.refs),'name')}</div>
-        <div class="panel"><h3>דפדפנים</h3>${listHTML(browsers&&(browsers.top||browsers.browsers),'name')}</div>
-        <div class="panel"><h3>מדינות</h3>${listHTML(locs&&(locs.top||locs.locations),'name')}</div>
+        <div class="panel"><h3>על מה מקליקים</h3>${listHTML(topClicks)}</div>
+        <div class="panel"><h3>מדינות</h3>${listHTML(countries)}</div>
+        <div class="panel"><h3>מכשירים</h3>${listHTML(devices)}</div>
+        <div class="panel"><h3>שפות דפדפן</h3>${listHTML(langs,{ltr:true})}</div>
       </div>`;
   }catch(err){
-    body.innerHTML=`<div class="errbox" style="display:block">
-      לא הצלחתי למשוך נתונים (${err.message}).<br>
-      ייתכן שהדפדפן חוסם את הבקשה (CORS) או שהמפתח שגוי.
-      אפשר תמיד לצפות בנתונים ישירות: <a class="linkout" href="https://${code}.goatcounter.com" target="_blank">הדשבורד של GoatCounter ↗</a></div>`;
+    body.innerHTML=`<div class="errbox">לא הצלחתי למשוך נתונים (${esc(err.message)}).<br>
+      בדוק שהמפתחות נכונים בטאב הגדרות, או צפה ישירות:
+      <a class="linkout" href="${phHost(c.region)}" target="_blank">PostHog ↗</a></div>`;
   }
+}
+
+/* ═══════════ marketing (Pixel + CAPI) ═══════════ */
+function renderMkt(){
+  const w=$('mktWrap');
+  const pixel=localStorage.getItem(LS.pixel)||'';
+  w.innerHTML=`
+    <div class="dash-head"><h2>🎯 שיווק ומעקב פרסום</h2></div>
+    <div class="setup">
+      <h3>Meta Pixel <span class="pill ${pixel?'on':''}" id="pixelPill">${pixel?'מוטמע באתר':'לא מוטמע'}</span></h3>
+      <div class="note">הפיקסל מודד את כל האירועים באתר עבור קמפיינים בפייסבוק/אינסטגרם: PageView על כל כניסה, ואירוע <b>Contact</b> על כל לחיצה על WhatsApp. את ה-Pixel ID מוצאים ב-<a class="linkout" href="https://business.facebook.com/events_manager2" target="_blank">Meta Events Manager ↗</a></div>
+      <label>Pixel ID</label>
+      <input id="pixelIn" placeholder="123456789012345" value="${esc(pixel)}">
+      <button class="btn btn-dark" onclick="publishPixel()">הטמע באתר</button>
+      ${pixel?'<button class="btn" style="background:transparent;color:var(--err)" onclick="removePixel()">הסר מהאתר</button>':''}
+    </div>
+    <div class="setup">
+      <h3>Conversions API (CAPI) <span class="pill" id="capiPill">בודק…</span></h3>
+      <div class="note">CAPI שולח את האירועים גם מהשרת — עוקף חוסמי פרסומות ומשפר את דיוק הקמפיינים. התשתית כבר מותקנת באתר (<code>/api/capi</code>) עם דה-דופליקציה אוטומטית מול הפיקסל. כדי להפעיל:</div>
+      <ol>
+        <li>ב-<a class="linkout" href="https://business.facebook.com/events_manager2" target="_blank">Events Manager</a>: בחר את הפיקסל → Settings → Conversions API → <b>Generate Access Token</b></li>
+        <li>ב-<a class="linkout" href="https://vercel.com/michaelavs-1s-projects/tasha-ourstory/settings/environment-variables" target="_blank">Vercel → Environment Variables ↗</a> הוסף שניים:<br>
+          <code>META_PIXEL_ID</code> = מספר הפיקסל<br>
+          <code>META_CAPI_TOKEN</code> = הטוקן שיצרת</li>
+        <li>ב-Vercel: Deployments → ⋯ → Redeploy (כדי שהמשתנים ייטענו)</li>
+      </ol>
+      <button class="btn btn-dark" onclick="checkCapi(true)">בדוק סטטוס CAPI</button>
+    </div>`;
+  checkCapi(false);
+}
+async function checkCapi(showToast){
+  try{
+    const r=await fetch('/api/capi',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({event_name:'TestPing',url:location.href})});
+    const j=await r.json();
+    const on=j.ok===true;
+    const pill=$('capiPill');
+    if(pill){pill.textContent=on?'פעיל ✓':(j.reason==='CAPI not configured'?'ממתין להגדרה':'שגיאה');pill.className='pill'+(on?' on':'');}
+    if(showToast)toast(on?'CAPI פעיל ✓':'CAPI עדיין לא מוגדר','ok');
+  }catch(e){const pill=$('capiPill');if(pill)pill.textContent='לא זמין';}
+}
+const PIXEL_CODE=id=>`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${id}');fbq('track','PageView',{},{eventID:window.__pvId||undefined});`;
+async function publishPixel(){
+  const id=$('pixelIn').value.trim();
+  if(!/^\d{8,20}$/.test(id)){toast('Pixel ID לא תקין (מספר בלבד)','err');return;}
+  if(!confirm('להטמיע את הפיקסל '+id+' באתר החי?'))return;
+  try{
+    await commitSite(doc=>{
+      const slot=doc.getElementById('pixel-slot');
+      if(!slot)throw new Error('pixel slot not found');
+      slot.textContent=PIXEL_CODE(id);
+    },'הטמעת Meta Pixel דרך מערכת הניהול',null);
+    localStorage.setItem(LS.pixel,id);
+    toast('הפיקסל הוטמע באתר ✓','ok');renderMkt();
+  }catch(err){toast('שגיאה: '+err.message,'err');}
+}
+async function removePixel(){
+  if(!confirm('להסיר את הפיקסל מהאתר?'))return;
+  try{
+    await commitSite(doc=>{
+      const slot=doc.getElementById('pixel-slot');
+      if(slot)slot.textContent='/* PIXEL_DISABLED */';
+    },'הסרת Meta Pixel',null);
+    localStorage.removeItem(LS.pixel);
+    toast('הפיקסל הוסר ✓','ok');renderMkt();
+  }catch(err){toast('שגיאה: '+err.message,'err');}
+}
+
+/* ═══════════ settings ═══════════ */
+function renderSet(){
+  const w=$('setWrap');const c=phConf();
+  w.innerHTML=`
+    <div class="dash-head"><h2>⚙️ הגדרות</h2></div>
+    <div class="setup">
+      <h3>חיבור PostHog (מדידת נתונים) <span class="pill ${c.proj&&c.key?'on':''}">${c.proj&&c.key?'מחובר':'לא מוגדר'}</span></h3>
+      <div class="note">הוראות מלאות בטאב הסטטיסטיקות. שלושה ערכים מ-PostHog:</div>
+      <label>אזור (Region)</label>
+      <select id="phRegion"><option value="us" ${c.region==='us'?'selected':''}>US (us.posthog.com)</option><option value="eu" ${c.region==='eu'?'selected':''}>EU (eu.posthog.com)</option></select>
+      <label>Project API Key (phc_…) — לאיסוף נתונים באתר</label>
+      <input id="phPub" placeholder="phc_..." value="${esc(c.pub)}">
+      <label>Project ID (מספר)</label>
+      <input id="phProj" placeholder="12345" value="${esc(c.proj)}">
+      <label>Personal API Key (phx_…) — לקריאת הנתונים בדשבורד</label>
+      <input id="phKey" type="password" placeholder="phx_..." value="${esc(c.key)}">
+      <button class="btn btn-dark" onclick="savePH()">שמור והפעל מעקב באתר</button>
+    </div>
+    <div class="setup">
+      <h3>מפתח GitHub</h3>
+      <div class="note">משמש לפרסום שינויים. תוקפו עד 11.7.2026 — כשפג, צור חדש ב-GitHub והדבק כאן.</div>
+      <label>Token</label>
+      <input id="setTok" type="password" placeholder="github_pat_...">
+      <button class="btn btn-dark" onclick="saveTok()">עדכן מפתח</button>
+      <button class="btn" style="background:transparent;color:var(--err);margin-inline-start:.5rem" onclick="logout()">התנתק</button>
+    </div>
+    <div class="setup">
+      <h3>קישורים</h3>
+      <div class="rowlist">
+        <div class="row"><span>האתר</span><a class="name ltr linkout" href="https://www.ourstorybook.me" target="_blank">www.ourstorybook.me</a></div>
+        <div class="row"><span>GitHub</span><a class="name ltr linkout" href="https://github.com/michaelavs-1/tasha-ourstory" target="_blank">michaelavs-1/tasha-ourstory</a></div>
+        <div class="row"><span>Vercel</span><a class="name ltr linkout" href="https://vercel.com/michaelavs-1s-projects/tasha-ourstory" target="_blank">vercel.com</a></div>
+      </div>
+    </div>`;
+}
+function saveTok(){const t=$('setTok').value.trim();if(!t)return;
+  validateToken(t).then(ok=>{if(ok){token=t;localStorage.setItem(LS.tok,t);$('setTok').value='';toast('המפתח עודכן ✓','ok');}
+  else toast('המפתח לא תקין','err');});}
+const PH_CODE=(pub,host)=>`!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init('${pub}',{api_host:'${host}',person_profiles:'always'});`;
+async function savePH(){
+  const region=$('phRegion').value,pub=$('phPub').value.trim(),
+        proj=$('phProj').value.trim(),key=$('phKey').value.trim();
+  if(!pub.startsWith('phc_')||!proj||!key){toast('יש למלא את כל השדות (phc_, מספר פרויקט, phx_)','err');return;}
+  localStorage.setItem(LS.phRegion,region);localStorage.setItem(LS.phPub,pub);
+  localStorage.setItem(LS.phProj,proj);localStorage.setItem(LS.phKey,key);
+  const ingest=region==='eu'?'https://eu.i.posthog.com':'https://us.i.posthog.com';
+  if(!confirm('לשמור ולהטמיע את סקריפט המעקב באתר החי?'))return;
+  try{
+    await commitSite(doc=>{
+      const slot=doc.getElementById('ph-slot');
+      if(!slot)throw new Error('analytics slot not found');
+      slot.textContent=PH_CODE(pub,ingest);
+    },'הפעלת מדידת PostHog דרך מערכת הניהול',null);
+    toast('המעקב הופעל באתר ✓ נתונים יתחילו להופיע תוך דקות','ok');
+    document.querySelector('[data-v=dashView]').click();
+  }catch(err){toast('שגיאה: '+err.message,'err');}
 }
 
 /* ═══════════ boot ═══════════ */
@@ -439,7 +532,7 @@ function boot(){
   $('loginView').style.display='none';
   $('appView').style.display='block';
   $('siteFrame').addEventListener('load',injectEditor);
-  loadFrame();
+  loadFrame();renderDash();
 }
 (async function(){
   if(token&&await validateToken(token))boot();
