@@ -1002,6 +1002,45 @@
     /* keep hero eyebrow clear of the nav on short screens */
     .hero-content { padding-top: 92px; }
     @media (max-width: 768px) { .hero-content { padding-top: 76px; } }
+
+    .occ::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
+      background:var(--gold);margin-inline-end:10px;vertical-align:middle;opacity:.75}
+
+    .lead-head{max-width:520px;margin:2.4rem auto 0}
+    .lead-form{max-width:520px;margin:0 auto 3rem;display:grid;gap:1rem;text-align:start}
+    .lead-form .fld label{display:block;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+      color:rgba(250,247,242,.5);margin-bottom:.4rem;font-family:'Inter',sans-serif}
+    .lead-form input,.lead-form textarea{width:100%;padding:.85rem 1rem;border-radius:12px;
+      border:1px solid rgba(250,247,242,.18);background:rgba(255,255,255,.05);color:#fff;
+      font-size:1rem;font-family:'Inter',sans-serif;transition:border-color .2s}
+    .lead-form input:focus,.lead-form textarea:focus{outline:none;border-color:var(--gold)}
+    .lead-form textarea{min-height:88px;resize:vertical}
+    .lead-form input::placeholder,.lead-form textarea::placeholder{color:rgba(250,247,242,.3)}
+    .btn-lead{background:var(--gold);color:#fff;border:none;border-radius:999px;padding:.95rem;
+      font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+      cursor:pointer;transition:background .2s}
+    .btn-lead:hover{background:var(--gold-dim)}
+    .lead-ok{display:none;background:rgba(196,149,106,.15);border:1px solid rgba(196,149,106,.35);
+      border-radius:12px;padding:1rem;color:var(--gold-light);text-align:center;font-size:.95rem}
+    .lead-ok.show{display:block}
+
+    #examples{background:var(--cream);padding:90px 6%}
+    .ex-header{max-width:600px;margin:0 auto 2.8rem;text-align:center}
+    .ex-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+    .excerpt{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;
+      box-shadow:0 2px 12px rgba(17,14,11,.04)}
+    .excerpt summary{list-style:none;cursor:pointer;padding:1.15rem 1.5rem;display:flex;align-items:center;
+      gap:.55rem;font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink)}
+    .excerpt summary::-webkit-details-marker{display:none}
+    .ex-loc{color:var(--muted);font-size:.95rem;font-family:'Inter',sans-serif}
+    .ex-read{margin-inline-start:auto;font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--gold-dim);white-space:nowrap}
+    .excerpt[open] .ex-read{opacity:.5}
+    .excerpt[open] summary{border-bottom:1px solid var(--warm)}
+    .ex-body{padding:1.3rem 1.5rem 1.7rem;color:var(--ink-soft);font-size:1.02rem;line-height:1.85;
+      white-space:pre-line;font-family:'Cormorant Garamond',serif;font-size:1.18rem}
+    @media(max-width:768px){#examples{padding:70px 5%}.excerpt summary{font-size:1.2rem;flex-wrap:wrap}
+      .ex-read{margin-inline-start:0}.ex-body{font-size:1.08rem}}
 </style>
 </head>
 <body>
@@ -1126,17 +1165,17 @@
 </section><section id="occasions">
 <div class="occ-header">
 <p class="eyebrow reveal" data-edit="occasions-1">Поводов — сколько угодно</p>
-<h2 class="section-title reveal" data-edit="occasions-2">Подарок на<br/><em>любой момент</em></h2>
+<h2 class="section-title reveal" data-edit="occasions-2">Подарок на<br/><em>все случаи жизни</em></h2>
 <div class="rule reveal" style="margin:1.6rem auto;"></div>
 <p class="body-text reveal" data-edit="occasions-3">Книга OUR STORY удивляет сильнее любых вещей — потому что она о самых близких.</p>
 </div>
 <div class="occ-grid reveal">
-<span class="occ" data-edit="occ-1">🎂 День рождения</span>
-<span class="occ" data-edit="occ-2">💍 Годовщина свадьбы</span>
-<span class="occ" data-edit="occ-3">✨ Юбилей родителей</span>
-<span class="occ" data-edit="occ-4">👶 Рождение ребёнка</span>
-<span class="occ" data-edit="occ-5">❤️ История вашей любви</span>
-<span class="occ" data-edit="occ-6">🎁 Просто так</span>
+<span class="occ" data-edit="occ-1">День рождения</span>
+<span class="occ" data-edit="occ-2">Годовщина свадьбы</span>
+<span class="occ" data-edit="occ-3">Юбилей родителей</span>
+<span class="occ" data-edit="occ-4">Рождение ребёнка</span>
+<span class="occ" data-edit="occ-5">История вашей любви</span>
+<span class="occ" data-edit="occ-6">Просто так</span>
 </div>
 </section>
 <!-- ── PROCESS ────────────────────── -->
@@ -1162,7 +1201,7 @@
 <div class="tl-dot"></div>
 <div class="tl-num">02</div>
 <h3 class="tl-title" data-edit="process-6">Серия интервью</h3>
-<p class="tl-text" data-edit="process-7">10 бесед (стандарт) или 15 бесед (расширенный пакет) по 90 минут. Индивидуальные вопросы для каждого. Тёплая, безопасная атмосфера.</p>
+<p class="tl-text" data-edit="process-7">10 глубоких бесед по 90 минут. Индивидуальные вопросы для каждого. Тёплая, безопасная атмосфера.</p>
 <span class="tl-duration" data-edit="process-13">4–8 недель</span>
 </div>
 <div class="tl-item reveal reveal-d2">
@@ -1220,6 +1259,50 @@
 <p class="feat-text" data-edit="features-14">Израиль, Европа, Америка, Австралия, Китай. Всё онлайн — по видеосвязи. Часовые пояса не мешают.</p>
 </div>
 </div>
+</section><section id="examples">
+<div class="ex-header">
+<p class="eyebrow reveal" data-edit="examples-1">Из готовых книг</p>
+<h2 class="section-title reveal" data-edit="examples-2">Отрывки из <em>настоящих историй</em></h2>
+<div class="rule reveal" style="margin:1.6rem auto;"></div>
+<p class="body-text reveal" data-edit="examples-3">Несколько страниц из книг, которые я уже создала — живым голосом тех, кто их рассказал.</p>
+</div>
+<div class="ex-list"><details class="excerpt reveal">
+<summary><span class="ex-name" data-edit="ex-1-name">Татьяна Н.</span><span class="ex-loc" data-edit="ex-1-loc">· Израиль</span><span class="ex-read" data-edit="ex-1-read">Читать историю</span></summary>
+<div class="ex-body" data-edit="ex-1-text">«Насколько я понимаю, лет до семнадцати романов у бабушки Лизы не было никаких, а если кто-то пытался за ней ухаживать, то тут же получал отпор. На лето её обычно отправляли к богатым теткам в имение в Подольской губернии. Там был свой конный завод, где она научилась верховой езде. Лиза гордилась тем, что сидела на лошади по-мужски, а не амазонкой.
+
+За стол всегда садилось много народа. На завтрак каждый человек, кроме всего прочего, получал половину жареного цыплёнка. На обед часто подавали мясной бульон, но варёное мясо из него отдавали в людскую — слугам. Господа его не ели. У Лизы, которая после этого пережила две войны, голод, арест мужа, гибель сына — всё это как-то уживалось в голове. С одной стороны, она рассказывала мне, что варёное мясо отдают в людскую, а с другой — учила не выливать воду из-под варёной картошки, так как из неё получается прекрасный супчик. И всё это было очень органично в ней.
+
+Бабушка Лиза была лёгкой, артистичной, элегантной, бесконечно женственной, и я её очень любила. Когда я была маленькой, она постоянно рассказывала мне семейные истории, и всё это я знаю именно от неё. Она учила меня шить, вязать крючком, вышивать гладью и болгарским крестом. На зимние каникулы я приезжала к ней в Лось, и у нас были так называемые долгие зимние вечера. Мы болтали, рукодельничали, слушали радио. Как-то на Новый год она мне сказала: „Подумай только, уже 1955 год, вот не думала, что доживу“…
+
+Когда ей исполнилось семнадцать лет, в неё влюбился её троюродный брат Мечислав. Он, как порядочный человек, пошёл к её маме просить руки дочери. Совсем скоро он вышел, хлопнув дверью, и исчез навсегда. „Он сделал тебе предложение, но я ему отказала! Они богатые, а мы бедные!“ Это была травма на всю жизнь. Потом Мечислав женился на другой. Когда началась война, он ушёл на фронт, а его беременная жена осталась в имении. Однажды в их дом пришли красные и расстреляли её вместе с ребёнком. Если бы бабушка вышла за него замуж, то это случилось бы с ней. Или нет… Никто не знает».</div>
+</details><details class="excerpt reveal">
+<summary><span class="ex-name" data-edit="ex-2-name">Рита Ч.</span><span class="ex-loc" data-edit="ex-2-loc">· США</span><span class="ex-read" data-edit="ex-2-read">Читать историю</span></summary>
+<div class="ex-body" data-edit="ex-2-text">«Боюсь ли я старости? А чего её бояться? Она же вот… со мной. Из-за того, что я старая, я более свободная. Я уже не должна выбирать профессию. Не должна растить детей. Не должна выбирать себе мужа… Впрочем, он сам меня выбрал…
+
+Я не боюсь старости. Конечно, я не хочу быть больной — это понятно, никто не хочет. Но я считаю, что в основном я правильно прожила свою жизнь: я получила хорошее образование, прочитала хорошие книги, вырастила и воспитала четырёх очень хороших детей, я стараюсь выполнять свой долг по отношению к другим людям. Например, моя мама — это был мой долг. Я сделала всё, чтобы она до конца своих дней чувствовала себя хорошо и была в семье.
+
+В чём смысл жизни? В тринадцать лет я пыталась найти ответ на этот вопрос. И нашла! Ответ — как можно больше узнать и понять. У меня очень рано возникло понятие, что есть душа. Жизнь моя — это жизнь моей души, а тело — обслуживающий персонал. Я родилась для того, чтобы обогатить, насытить, усовершенствовать свою душу.
+
+Моя семья не была религиозной. Бабушка выросла в православии, но советская власть убедила её, что никакого Бога нет, и на старости лет, когда она поняла, что скоро умрёт, ей захотелось помолиться, и я научила её читать „Отче наш“. „Бабушка, ты понимаешь, что происходит? Я — советская пионерка — учу тебя молитвам“. Она тоже посмеялась над этим».</div>
+</details><details class="excerpt reveal">
+<summary><span class="ex-name" data-edit="ex-3-name">Алеся Н.</span><span class="ex-loc" data-edit="ex-3-loc">· Англия</span><span class="ex-read" data-edit="ex-3-read">Читать историю</span></summary>
+<div class="ex-body" data-edit="ex-3-text">«Есть книга Гэри Чепмена, в которой автор выделяет пять языков любви: слова поощрения, время, подарки, помощь и прикосновения. Каждый человек по-своему показывает любовь, и в зависимости от того, как он её проявляет, того же он будет ожидать от другого. Я начала задумываться, а какой же язык любви у меня… Думаю, язык прикосновения — я постоянно обнимаю человека, целую, глажу. И язык помощи — делать что-то для другого, поддерживать любимого человека.
+
+В первую нашу встречу ты сказала: „Мама всё время заботится обо мне, а я не знаю, как же я могу позаботиться о своей маме. У меня есть проблема — я не знаю, как показать маме свою любовь…“. Алеся, что-то поменялось с того дня?
+
+Несмотря на то, что мама очень практичный человек, мне кажется, её язык любви — это слова поощрения. Маме очень важно, чтобы я говорила ей, что люблю её, что я о ней помню и думаю. Поэтому я начала ей об этом чаще говорить, несмотря на то, что для меня слова — не главное определение любви.
+
+Как думаешь, почему твоя мама решила написать семейную книгу? Маме хочется оставить память о семье, сохранить это в книге. Я же начала задумываться о семейной книге только после разговора с мамой и поняла, что это прекрасная идея, и это важно».</div>
+</details><details class="excerpt reveal">
+<summary><span class="ex-name" data-edit="ex-4-name">Алекс З.</span><span class="ex-loc" data-edit="ex-4-loc">· Германия</span><span class="ex-read" data-edit="ex-4-read">Читать историю</span></summary>
+<div class="ex-body" data-edit="ex-4-text">«Реализовал ли я свои мечты?.. Знаешь, если смотреть с одной стороны — то да, реализовал. У меня хорошая семья, крепкий дом, работа, которая кормит и даже иногда позволяет почувствовать себя нужным. Я объездил несколько стран, вырастил детей, посадил деревья. По всем внешним меркам — жизнь удалась. И я правда этому рад.
+
+А с другой стороны… многое я всё-таки оставил „на потом“. Мечтал написать книгу — откладывал. Хотел уйти в своё маленькое дело, которое бы горело внутри, — „потом, когда будет время“. Даже просто научиться играть на гитаре как следует — и то всё „завтра, завтра“.
+
+Сейчас мне 48, и я понимаю, что „завтра“ оказалось довольно коварной штукой. Оно всегда приходило, но уже с другими приоритетами, усталостью и новыми „важными“ делами. Иногда по ночам сижу на балконе и думаю: сколько же всего я мог сделать, если бы начал хотя бы на десять лет раньше…
+
+Но знаешь, что странно? Несмотря на это сожаление, я не чувствую себя разбитым. Наоборот — сейчас во мне появилось какое-то светлое, почти нежное отношение к тем несбывшимся мечтам. Они всё ещё со мной. Просто теперь я знаю цену времени. Так что да… реализовал. Не все. Но те, что успел — ценю по-настоящему. А остальные… у меня ещё есть время. Немного, но есть».</div>
+</details></div>
 </section>
 <!-- ── INTERLUDE ──────────────────── -->
 <div id="interlude">
@@ -1238,7 +1321,7 @@
 <div class="pricing-wrap" style="max-width:700px;">
 <div class="pricing-card reveal" style="margin-bottom:2px;">
 <span class="pricing-label" data-edit="pricing-16">Стандартный пакет · 10 встреч</span>
-<div class="pricing-amount" data-edit="pricing-18"><sup>$</sup>4500</div>
+<div class="pricing-amount" data-edit="pricing-18"><sup>$</sup>4200</div>
 <div class="pricing-desc" data-edit="pricing-20">единовременная оплата · без скрытых платежей</div>
 <div class="pricing-rule"></div>
 <ul class="pricing-list">
@@ -1249,14 +1332,13 @@
 <li data-edit="pricing-7">Сохранение живого голоса каждого члена семьи</li>
 <li data-edit="pricing-8">Вы читаете и утверждаете каждую страницу</li>
 <li data-edit="pricing-9">Электронная версия готовой книги включена</li>
-<li data-edit="pricing-10">Печатный экземпляр — 150€ + 20€ за каждый следующий</li>
+<li data-edit="pricing-10">Печатный экземпляр в твёрдом переплёте — 150€ (+20€ за каждый следующий). Можно добавить до 15 фотографий на ваш выбор. Доставка оплачивается отдельно.</li>
 </ul>
 <a class="btn-price" data-edit="pricing-22" href="https://wa.me/972545966450" target="_blank">
         Написать в WhatsApp — начать бесплатно
       </a>
 <p class="pricing-footnote" data-edit="pricing-11">Первая встреча бесплатна · Без скрытых платежей</p>
 </div>
-
 </div>
 </section>
 <!-- ── FAQ ────────────────────────── -->
@@ -1326,7 +1408,13 @@
 <p class="contact-subtitle reveal" data-edit="contact-3">
     Напишите мне прямо сейчас — я отвечу лично.
     Начнём с бесплатной встречи, без обязательств.
-  </p>
+  </p><div class="lead-head reveal"><p class="eyebrow" data-edit="lead-1" style="margin-bottom:.8rem">Оставьте заявку</p><p class="contact-subtitle" data-edit="lead-2" style="margin-bottom:2rem">Оставьте имя и контакты — я свяжусь с вами лично и мы обсудим вашу книгу.</p></div><form class="lead-form reveal" id="leadForm" onsubmit="return submitLead(event)">
+<div class="fld"><label data-edit="lead-3">Имя</label><input name="name" required=""/></div>
+<div class="fld"><label data-edit="lead-4">Телефон или email</label><input name="contact" required=""/></div>
+<div class="fld"><label data-edit="lead-5">Сообщение (необязательно)</label><textarea name="message"></textarea></div>
+<button class="btn-lead" data-edit="lead-6" type="submit">Оставить заявку</button>
+<div class="lead-ok" data-edit="lead-7" id="leadOk">Спасибо! Я свяжусь с вами в ближайшее время.</div>
+</form>
 <div class="reveal" style="display:flex;justify-content:center;">
 <div class="contact-card">
 <div class="contact-name" data-edit="contact-4">Таша Карлюка</div>
@@ -1416,7 +1504,7 @@
     }, { passive: true });
   }
 </script>
-<script id="i18nEN" type="application/json">{"nav-1": "<a href=\"#about\">About</a>", "nav-2": "<a href=\"#process\">Process</a>", "nav-3": "<a href=\"#pricing\">Pricing</a>", "nav-4": "<a href=\"#faq\">FAQ</a>", "nav-5": "<a class=\"nav-cta\" href=\"#contact\">Start</a>", "menu-1": "About", "menu-2": "Process", "menu-3": "Pricing", "menu-4": "FAQ", "menu-5": "Start", "hero-1": "Family stories · A book as a gift", "hero-2": "<span class=\"line\"><span class=\"line-inner\">Words that</span></span><span class=\"line\"><span class=\"line-inner\"><em>will stay</em></span></span><span class=\"line\"><span class=\"line-inner\">forever</span></span>", "hero-3": "I turn your family's stories into a living, warm book.<br/>The most personal gift — for a birthday, an anniversary, or just because.", "hero-4": "Free first meeting", "hero-5": "Learn more", "hero-scroll": "Scroll", "opening-1": "«The most precious gifts can't be bought.<br/>They can only be <strong>created</strong>.»", "opening-2": "Every family is a universe of stories — funny, touching, unbelievable. OUR STORY turns them into a book that will be read again and again — and passed on.", "about-1": "About the author", "about-2": "Tasha <em>Karlyuka</em>", "about-3": "I am a journalist, writer and screenwriter. Born in Kyiv, I have lived in Tel Aviv, Europe and the Israeli desert. Today I live in a quiet village near Jerusalem.", "about-4": "I hold a master's degree in psychology — it helps me lead interviews so that people feel safe and talk about the things they usually keep to themselves.", "about-5": "Screenwriter of the films “Felix and His Love” and “Berenshtein”", "about-6": "Short stories in anthologies edited by Lyudmila Ulitskaya", "about-7": "Author of the book “Oceans in Three-Liter Jars” (2021)", "about-8": "Master of psychology — I interview with heart", "about-9": "15+", "about-10": "years in<br/>journalism", "what-1": "What is OUR STORY", "what-2": "Not an album.<br/>Not a questionnaire.<br/><em>A living book.</em>", "what-3": "A book born from real conversations — carefully, with love for every detail. A book that keeps not only the facts, but the intonations, the humor, the character.", "what-4": "Living interviews", "what-5": "Warm 90-minute conversations — in person or online, anywhere in the world. I hold every meeting myself. Even the quietest people start talking.", "what-6": "Literary text", "what-7": "I turn conversations into living text, preserving each person's true voice. You will recognize your loved ones in every phrase.", "what-8": "An eternal keepsake", "what-9": "A book your children, grandchildren and great-grandchildren will read. It keeps what can never be restored: intonations, jokes, destinies.", "occasions-1": "So many occasions", "occasions-2": "A gift for<br/><em>any moment</em>", "occasions-3": "An OUR STORY book surprises more than any thing money can buy — because it is about the people you love.", "occ-1": "🎂 Birthday", "occ-2": "💍 Wedding anniversary", "occ-3": "✨ Parents' jubilee", "occ-4": "👶 A new baby", "occ-5": "❤️ Your love story", "occ-6": "🎁 Just because", "process-1": "How it works", "process-2": "From the first call<br/>to the <em>finished book</em>", "process-3": "You live your life — I take care of everything else. The whole process takes 2–4 months.", "process-4": "Free first meeting", "process-5": "We get to know each other and talk about your family and its story. I help you decide whose story should be told and how best to tell it.", "process-6": "A series of interviews", "process-7": "10 conversations (standard) or 15 (extended package), 90 minutes each. Personal questions for each person. A warm, safe atmosphere.", "process-8": "Writing the book", "process-9": "I turn the recordings into literary text. You read every chapter as it is written — it is your book, and it comes out exactly as it should.", "process-10": "The finished book", "process-11": "The digital edition is a gift for the whole family. If you wish — a beautiful hardcover edition: 150€ for the first copy, +20€ for each additional one.", "process-12": "No obligations", "process-13": "4–8 weeks", "process-14": "3–6 weeks", "process-15": "Yours forever", "features-1": "All included", "features-2": "Why families<br/>choose <em>OUR STORY</em>", "features-3": "Psychologist + journalist", "features-4": "A master's in psychology and 15 years of journalism — I know how to listen so that people open up. Even the quietest start talking.", "features-5": "Complete confidentiality", "features-6": "Your stories remain yours alone. I publish nothing without consent. Family secrets are in safe hands.", "features-7": "I do everything personally", "features-8": "Every interview, every page is my own work. I don't delegate. You work with me, not with a team of strangers.", "features-9": "You take part in every step", "features-10": "You read and approve every page. The book is created together with you — it is your story, and it has to feel exactly right.", "features-11": "A gift that can't be repeated", "features-12": "No store sells anything like it: a story about you, written by a writer. The only copy in the world.", "features-13": "I work worldwide", "features-14": "Israel, Europe, America, Australia, China. Everything online — by video call. Time zones are never a problem.", "interlude-1": "«The best stories are the ones<br/> that happened <em>to us</em>.<br/> They deserve a book.»", "interlude-2": "— Tasha Karlyuka", "pricing-1": "Pricing", "pricing-2": "One price — <em>everything included</em>", "pricing-16": "Standard package · 10 meetings", "pricing-18": "<sup>$</sup>4500", "pricing-20": "one-time payment · no hidden fees", "pricing-3": "Free first meeting — no obligations", "pricing-4": "10 in-depth 90-minute interviews", "pricing-5": "Personal questions tailored to your family", "pricing-6": "Literary treatment of all materials", "pricing-7": "The living voice of every family member, preserved", "pricing-8": "You read and approve every page", "pricing-9": "Digital edition of the finished book included", "pricing-10": "Printed copy — 150€ + 20€ for each additional one", "pricing-22": "Message me on WhatsApp — start for free", "pricing-11": "First meeting is free · No hidden fees", "faq-1": "Questions & answers", "faq-2": "Still have<br/><em>questions?</em>", "faq-3": "I understand — it's an important decision. Here are answers to the most common questions. If yours isn't here, just write to me.", "faq-10": "Who is this for?", "faq-4": "A gift for a birthday, an anniversary or a jubilee. A book for a couple — about your love story. A gift for your parents — about the life of the family. Or a book about yourself — for your children and grandchildren. Age, geography and family size don't matter.", "faq-11": "What if my loved one “can't tell stories”?", "faq-5": "That is exactly why I am here. I have a master's degree in psychology and years of interviewing experience. I know how to create an atmosphere in which even the quietest people begin to speak. Usually, after the first 20 minutes, people forget about the recording and simply talk.", "faq-12": "Can we work online if we live in different countries?", "faq-6": "Yes, fully online. All interviews are held by video call (Zoom or WhatsApp). I work with people all over the world: Israel, Europe, America, Australia, China. Time zones are not a problem — we always find a convenient time.", "faq-13": "How long does the whole process take?", "faq-7": "On average, 2–4 months from the first meeting to the finished book. It depends on how many people need to be interviewed and on the rhythm of meetings that suits your family. There is no rush — what matters is doing it well.", "faq-14": "What language will the book be written in?", "faq-8": "The book is written in Russian. Interviews are held in Russian or Hebrew. If you need the book in another language — we will discuss it individually.", "faq-15": "Can it be ready for a specific date?", "faq-9": "Yes! If a birthday, a wedding or an anniversary is coming up — tell me the date at our first meeting and we will build the schedule around it. On average a book takes 2–4 months, but shorter formats can be ready sooner.", "contact-1": "Get in touch", "contact-2": "Ready to tell<br/><em>your story?</em>", "contact-3": "Write to me right now — I answer personally. We'll start with a free meeting, no obligations.", "contact-4": "Tasha Karlyuka", "contact-5": "Journalist · Writer · Screenwriter", "footer-1": "© 2025 OUR STORY · Tasha Karlyuka"}</script>
+<script id="i18nEN" type="application/json">{"nav-1": "<a href=\"#about\">About</a>", "nav-2": "<a href=\"#process\">Process</a>", "nav-3": "<a href=\"#pricing\">Pricing</a>", "nav-4": "<a href=\"#faq\">FAQ</a>", "nav-5": "<a class=\"nav-cta\" href=\"#contact\">Start</a>", "menu-1": "About", "menu-2": "Process", "menu-3": "Pricing", "menu-4": "FAQ", "menu-5": "Start", "hero-1": "Family stories · A book as a gift", "hero-2": "<span class=\"line\"><span class=\"line-inner\">Words that</span></span><span class=\"line\"><span class=\"line-inner\"><em>will stay</em></span></span><span class=\"line\"><span class=\"line-inner\">forever</span></span>", "hero-3": "I turn your family's stories into a living, warm book.<br/>The most personal gift — for a birthday, an anniversary, or just because.", "hero-4": "Free first meeting", "hero-5": "Learn more", "hero-scroll": "Scroll", "opening-1": "«The most precious gifts can't be bought.<br/>They can only be <strong>created</strong>.»", "opening-2": "Every family is a universe of stories — funny, touching, unbelievable. OUR STORY turns them into a book that will be read again and again — and passed on.", "about-1": "About the author", "about-2": "Tasha <em>Karlyuka</em>", "about-3": "I am a journalist, writer and screenwriter. Born in Kyiv, I have lived in Tel Aviv, Europe and the Israeli desert. Today I live in a quiet village near Jerusalem.", "about-4": "I hold a master's degree in psychology — it helps me lead interviews so that people feel safe and talk about the things they usually keep to themselves.", "about-5": "Screenwriter of the films “Felix and His Love” and “Berenshtein”", "about-6": "Short stories in anthologies edited by Lyudmila Ulitskaya", "about-7": "Author of the book “Oceans in Three-Liter Jars” (2021)", "about-8": "Master of psychology — I interview with heart", "about-9": "15+", "about-10": "years in<br/>journalism", "what-1": "What is OUR STORY", "what-2": "Not an album.<br/>Not a questionnaire.<br/><em>A living book.</em>", "what-3": "A book born from real conversations — carefully, with love for every detail. A book that keeps not only the facts, but the intonations, the humor, the character.", "what-4": "Living interviews", "what-5": "Warm 90-minute conversations — in person or online, anywhere in the world. I hold every meeting myself. Even the quietest people start talking.", "what-6": "Literary text", "what-7": "I turn conversations into living text, preserving each person's true voice. You will recognize your loved ones in every phrase.", "what-8": "An eternal keepsake", "what-9": "A book your children, grandchildren and great-grandchildren will read. It keeps what can never be restored: intonations, jokes, destinies.", "occasions-1": "So many occasions", "occasions-2": "A gift for<br/><em>every occasion</em>", "occasions-3": "An OUR STORY book surprises more than any thing money can buy — because it is about the people you love.", "occ-1": "Birthday", "occ-2": "Wedding anniversary", "occ-3": "Parents' jubilee", "occ-4": "A new baby", "occ-5": "Your love story", "occ-6": "Just because", "process-1": "How it works", "process-2": "From the first call<br/>to the <em>finished book</em>", "process-3": "You live your life — I take care of everything else. The whole process takes 2–4 months.", "process-4": "Free first meeting", "process-5": "We get to know each other and talk about your family and its story. I help you decide whose story should be told and how best to tell it.", "process-6": "A series of interviews", "process-7": "10 in-depth 90-minute conversations. Personal questions for each person. A warm, safe atmosphere.", "process-8": "Writing the book", "process-9": "I turn the recordings into literary text. You read every chapter as it is written — it is your book, and it comes out exactly as it should.", "process-10": "The finished book", "process-11": "The digital edition is a gift for the whole family. If you wish — a beautiful hardcover edition: 150€ for the first copy, +20€ for each additional one.", "process-12": "No obligations", "process-13": "4–8 weeks", "process-14": "3–6 weeks", "process-15": "Yours forever", "features-1": "All included", "features-2": "Why families<br/>choose <em>OUR STORY</em>", "features-3": "Psychologist + journalist", "features-4": "A master's in psychology and 15 years of journalism — I know how to listen so that people open up. Even the quietest start talking.", "features-5": "Complete confidentiality", "features-6": "Your stories remain yours alone. I publish nothing without consent. Family secrets are in safe hands.", "features-7": "I do everything personally", "features-8": "Every interview, every page is my own work. I don't delegate. You work with me, not with a team of strangers.", "features-9": "You take part in every step", "features-10": "You read and approve every page. The book is created together with you — it is your story, and it has to feel exactly right.", "features-11": "A gift that can't be repeated", "features-12": "No store sells anything like it: a story about you, written by a writer. The only copy in the world.", "features-13": "I work worldwide", "features-14": "Israel, Europe, America, Australia, China. Everything online — by video call. Time zones are never a problem.", "interlude-1": "«The best stories are the ones<br/> that happened <em>to us</em>.<br/> They deserve a book.»", "interlude-2": "— Tasha Karlyuka", "pricing-1": "Pricing", "pricing-2": "One price — <em>everything included</em>", "pricing-16": "Standard package · 10 meetings", "pricing-18": "<sup>$</sup>4200", "pricing-20": "one-time payment · no hidden fees", "pricing-3": "Free first meeting — no obligations", "pricing-4": "10 in-depth 90-minute interviews", "pricing-5": "Personal questions tailored to your family", "pricing-6": "Literary treatment of all materials", "pricing-7": "The living voice of every family member, preserved", "pricing-8": "You read and approve every page", "pricing-9": "Digital edition of the finished book included", "pricing-10": "Printed hardcover copy — 150€ (+20€ for each additional one). You may add up to 15 photographs of your choice. Shipping is paid separately.", "pricing-22": "Message me on WhatsApp — start for free", "pricing-11": "First meeting is free · No hidden fees", "faq-1": "Questions & answers", "faq-2": "Still have<br/><em>questions?</em>", "faq-3": "I understand — it's an important decision. Here are answers to the most common questions. If yours isn't here, just write to me.", "faq-10": "Who is this for?", "faq-4": "A gift for a birthday, an anniversary or a jubilee. A book for a couple — about your love story. A gift for your parents — about the life of the family. Or a book about yourself — for your children and grandchildren. Age, geography and family size don't matter.", "faq-11": "What if my loved one “can't tell stories”?", "faq-5": "That is exactly why I am here. I have a master's degree in psychology and years of interviewing experience. I know how to create an atmosphere in which even the quietest people begin to speak. Usually, after the first 20 minutes, people forget about the recording and simply talk.", "faq-12": "Can we work online if we live in different countries?", "faq-6": "Yes, fully online. All interviews are held by video call (Zoom or WhatsApp). I work with people all over the world: Israel, Europe, America, Australia, China. Time zones are not a problem — we always find a convenient time.", "faq-13": "How long does the whole process take?", "faq-7": "On average, 2–4 months from the first meeting to the finished book. It depends on how many people need to be interviewed and on the rhythm of meetings that suits your family. There is no rush — what matters is doing it well.", "faq-14": "What language will the book be written in?", "faq-8": "The book is written in Russian. Interviews are held in Russian or Hebrew. If you need the book in another language — we will discuss it individually.", "faq-15": "Can it be ready for a specific date?", "faq-9": "Yes! If a birthday, a wedding or an anniversary is coming up — tell me the date at our first meeting and we will build the schedule around it. On average a book takes 2–4 months, but shorter formats can be ready sooner.", "contact-1": "Get in touch", "contact-2": "Ready to tell<br/><em>your story?</em>", "contact-3": "Write to me right now — I answer personally. We'll start with a free meeting, no obligations.", "contact-4": "Tasha Karlyuka", "contact-5": "Journalist · Writer · Screenwriter", "footer-1": "© 2025 OUR STORY · Tasha Karlyuka", "examples-1": "From finished books", "examples-2": "Excerpts from <em>real stories</em>", "examples-3": "A few pages from books I have already created — in the living voice of the people who told them.", "lead-1": "Leave a request", "lead-2": "Leave your name and contact details — I'll reach out personally and we'll talk about your book.", "lead-3": "Name", "lead-4": "Phone or email", "lead-5": "Message (optional)", "lead-6": "Send request", "lead-7": "Thank you! I will contact you very soon.", "ex-1-name": "Татьяна Н.", "ex-1-loc": "· Israel", "ex-1-read": "Read the story", "ex-1-text": "«As far as I understand, Grandmother Liza had no romances until she was about seventeen, and anyone who tried to court her was rebuffed at once. In summer she was usually sent to her wealthy aunts' estate in the Podolsk province. They had their own stud farm, where she learned to ride. Liza was proud that she sat astride, like a man, and not side-saddle.\n\nMany people always sat down to table. At breakfast each person received, among other things, half a roast chicken. At dinner a meat broth was often served, but the boiled meat from it was given to the servants' hall. The masters did not eat it. In Liza — who afterwards lived through two wars, famine, her husband's arrest, the death of her son — all of this somehow coexisted. On one hand she told me the boiled meat went to the servants; on the other she taught me never to pour out the water from boiled potatoes, because it makes a wonderful soup. And all of it lived in her quite naturally.\n\nGrandmother Liza was light, artistic, elegant, endlessly feminine, and I loved her very much. When I was little she was forever telling me family stories — everything I know, I know from her. She taught me to sew, to crochet, to embroider. I came to her for the winter holidays and we had what we called the long winter evenings. We chatted, did needlework, listened to the radio. One New Year she said to me: „Just think — it is already 1955; I never thought I would live to see it“…\n\nWhen she turned seventeen, her second cousin Mechislav fell in love with her. Being an honourable man, he went to her mother to ask for her hand. Very soon he came out, slammed the door, and vanished forever. „He proposed to you, but I refused him! They are rich and we are poor!“ It was a wound for life. Later Mechislav married another. When the war began he went to the front, and his pregnant wife stayed at the estate. One day the Reds came to their house and shot her together with her child. Had Grandmother married him, that would have happened to her. Or perhaps not… No one knows.»", "ex-2-name": "Рита Ч.", "ex-2-loc": "· USA", "ex-2-read": "Read the story", "ex-2-text": "«Am I afraid of old age? Why be afraid of it? It is right here… with me. Because I am old, I am freer. I no longer have to choose a profession. I don't have to raise children. I don't have to choose a husband… though he chose me himself…\n\nI am not afraid of old age. Of course I don't want to be ill — that's obvious, no one does. But I believe that on the whole I lived my life rightly: I got a good education, read good books, raised and brought up four very good children, and I try to do my duty toward other people. My mother, for instance, was my duty. I did everything so that to the end of her days she would feel well and stay within the family.\n\nWhat is the meaning of life? At thirteen I tried to find the answer to that question. And I found it! The answer is to learn and understand as much as possible. Very early I came to the notion that the soul exists. My life is the life of my soul, and the body is the staff that serves it. I was born to enrich, to nourish, to perfect my soul.\n\nMy family was not religious. My grandmother grew up in Orthodoxy, but the Soviet state convinced her there was no God, and in her old age, when she understood she would soon die, she wanted to pray, and I taught her to say the „Our Father“. „Grandmother, do you realise what is happening? I — a Soviet Young Pioneer — am teaching you prayers“. She laughed at that too.»", "ex-3-name": "Алеся Н.", "ex-3-loc": "· England", "ex-3-read": "Read the story", "ex-3-text": "«There is a book by Gary Chapman in which the author identifies five love languages: words of affirmation, time, gifts, acts of service and touch. Everyone shows love in their own way, and the way they express it is the way they will expect it in return. I began to wonder what my own love language is… I think it's touch — I'm forever hugging, kissing, stroking the person. And acts of service — doing something for another, supporting the one I love.\n\nAt our first meeting you said: „Mama takes care of me all the time, and I don't know how I can take care of my mama. My problem is that I don't know how to show my mother my love…“. Alesya, has anything changed since that day?\n\nEven though my mother is a very practical person, it seems to me that her love language is words of affirmation. It matters greatly to her that I tell her I love her, that I remember and think of her. So I began to say it to her more often, even though for me words are not the main definition of love.\n\nWhy do you think your mother decided to write a family book? She wants to leave a memory of the family, to preserve it in a book. I myself only began to think about a family book after talking with her — and I realised it is a wonderful idea, and that it matters.»", "ex-4-name": "Алекс З.", "ex-4-loc": "· Germany", "ex-4-read": "Read the story", "ex-4-text": "«Have I fulfilled my dreams?.. You know, looked at from one side — yes, I have. I have a good family, a solid home, work that feeds us and sometimes even lets me feel needed. I have travelled to several countries, raised children, planted trees. By every outward measure, life has turned out well. And I am truly glad of it.\n\nBut on the other side… there is much I still left „for later“. I dreamed of writing a book — I put it off. I wanted to start my own small venture, something that would burn inside me — „later, when there's time“. Even just learning to play the guitar properly — always „tomorrow, tomorrow“.\n\nI am 48 now, and I understand that „tomorrow“ turned out to be a rather treacherous thing. It always came, but already with different priorities, with tiredness and new „important“ matters. Sometimes at night I sit on the balcony and think: how much I could have done, had I begun even ten years earlier…\n\nBut you know what's strange? Despite that regret, I don't feel broken. On the contrary — something bright, almost tender, has appeared in me toward those unfulfilled dreams. They are still with me. It's just that now I know the price of time. So yes… I have fulfilled them. Not all. But the ones I managed — I truly treasure. And the rest… I still have time. Not much, but I have it.»"}</script>
 <script>
 (function(){
   var RU = null;
@@ -1490,5 +1578,30 @@
   },true);
 })();
 </script>
-</body>
+<script>
+function submitLead(e){
+  e.preventDefault();
+  var f=e.target, d={};
+  new FormData(f).forEach(function(v,k){d[k]=v;});
+  var id=(Date.now().toString(36)+Math.random().toString(36).slice(2,8));
+  try{if(window.posthog&&posthog.capture)posthog.capture('lead_submit',{contact:d.contact});}catch(_){}
+  try{if(window.fbq)fbq('track','Lead',{},{eventID:id});}catch(_){}
+  try{navigator.sendBeacon&&navigator.sendBeacon('/api/capi',new Blob([JSON.stringify({event_name:'Lead',event_id:id,url:location.href})],{type:'application/json'}));}catch(_){}
+  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+    .then(function(r){return r.json();}).catch(function(){return{ok:false};})
+    .then(function(j){
+      if(j&&j.ok){var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');f.reset();
+        f.querySelectorAll('.fld,.btn-lead').forEach(function(x){x.style.display='none';});}
+      else{
+        var lang=document.documentElement.lang;
+        var pre=(lang==='en')
+          ?('Hello! My name is '+d.name+'. '+(d.message||'')+' My contact: '+d.contact)
+          :('Здравствуйте! Меня зовут '+d.name+'. '+(d.message||'')+' Мои контакты: '+d.contact);
+        window.open('https://wa.me/972545966450?text='+encodeURIComponent(pre),'_blank');
+        var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');
+      }
+    });
+  return false;
+}
+</script></body>
 </html>

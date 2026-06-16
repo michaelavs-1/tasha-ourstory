@@ -428,8 +428,30 @@ function renderMkt(){
         <li>ב-Vercel: Deployments → ⋯ → Redeploy (כדי שהמשתנים ייטענו)</li>
       </ol>
       <button class="btn btn-dark" onclick="checkCapi(true)">בדוק סטטוס CAPI</button>
+    </div>
+    <div class="setup">
+      <h3>טופס "השאירו פרטים" <span class="pill" id="leadPill">בודק…</span></h3>
+      <div class="note">באתר יש טופס שבו מבקרים משאירים שם וטלפון/אימייל. כל פנייה נשלחת אליך למייל. כל עוד לא הוגדר — הטופס שולח את הפרטים אוטומטית ל-WhatsApp שלך (כגיבוי). להפעלת מיילים:</div>
+      <ol>
+        <li>היכנס ל-<a class="linkout" href="https://web3forms.com" target="_blank">web3forms.com</a>, הזן <code>tasha.karluka@gmail.com</code> וקבל Access Key במייל (חינם, ללא חשבון)</li>
+        <li>ב-<a class="linkout" href="https://vercel.com/michaelavs-1s-projects/tasha-ourstory/settings/environment-variables" target="_blank">Vercel → Environment Variables ↗</a> הוסף:<br>
+          <code>WEB3FORMS_KEY</code> = ה-Access Key שקיבלת</li>
+        <li>ב-Vercel: Deployments → ⋯ → Redeploy</li>
+      </ol>
+      <button class="btn btn-dark" onclick="checkLead(true)">בדוק סטטוס הטופס</button>
     </div>`;
-  checkCapi(false);
+  checkCapi(false);checkLead(false);
+}
+async function checkLead(showToast){
+  try{
+    const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({})});
+    const j=await r.json();
+    const configured=j.reason!=='not_configured';
+    const pill=$('leadPill');
+    if(pill){pill.textContent=configured?'שולח למייל ✓':'גיבוי ל-WhatsApp';pill.className='pill'+(configured?' on':'');}
+    if(showToast)toast(configured?'הטופס שולח למייל ✓':'הטופס עדיין שולח ל-WhatsApp (גיבוי)','ok');
+  }catch(e){const pill=$('leadPill');if(pill)pill.textContent='לא זמין';}
 }
 async function checkCapi(showToast){
   try{
