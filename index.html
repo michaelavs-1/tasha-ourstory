@@ -123,7 +123,7 @@
     ════════════════════════════════════ */
     #hero {
       position: relative;
-      height: 100vh; min-height: 680px;
+      min-height: 100vh; padding: 112px 6% 88px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
@@ -923,7 +923,7 @@
       section, #opening, #about, #what, #process, #features, #pricing, #faq, #contact {
         padding: 80px 5%;
       }
-      #hero { min-height: 100svh; }
+      #hero { min-height: 100svh; padding: 96px 5% 72px; }
 
       .hero-title { font-size: clamp(2.8rem, 11vw, 4.5rem); }
       .hero-sub { font-size: 0.95rem; }
@@ -965,7 +965,6 @@
     @media (max-width: 768px) {
       .interlude-bg { background-attachment: scroll; }
       .hero-scroll { bottom: 1.2rem; }
-      .hero-content { padding-bottom: 80px; }
       .hero-title .line-inner { animation: none; opacity: 1; transform: none; }
       .hero-eyebrow { animation: none; opacity: 1; transform: none; }
       .hero-sub, .hero-actions { animation: none; opacity: 1; transform: none; }
@@ -1000,8 +999,6 @@
     }
 
     /* keep hero eyebrow clear of the nav on short screens */
-    .hero-content { padding-top: 92px; }
-    @media (max-width: 768px) { .hero-content { padding-top: 76px; } }
 
     .occ::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
       background:var(--gold);margin-inline-end:10px;vertical-align:middle;opacity:.75}
@@ -1041,6 +1038,18 @@
       white-space:pre-line;font-family:'Cormorant Garamond',serif;font-size:1.18rem}
     @media(max-width:768px){#examples{padding:70px 5%}.excerpt summary{font-size:1.2rem;flex-wrap:wrap}
       .ex-read{margin-inline-start:0}.ex-body{font-size:1.08rem}}
+
+    /* ── cross-device: short / laptop viewports ── */
+    @media (max-height: 860px) {
+      .hero-eyebrow { margin-bottom: 1.2rem; }
+      .hero-title { margin-bottom: 1.2rem; font-size: clamp(2.6rem, 6vw, 5rem); }
+      .hero-sub { margin-bottom: 1.8rem; }
+    }
+    @media (max-height: 740px) {
+      .hero-scroll { display: none; }
+      .hero-title { margin-bottom: 0.9rem; }
+      .hero-sub { margin-bottom: 1.4rem; }
+    }
 </style>
 </head>
 <body>
