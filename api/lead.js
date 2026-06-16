@@ -16,7 +16,8 @@ module.exports = async (req, res) => {
   try {
     const r = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(EMAIL), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json',
+        Origin: 'https://www.ourstorybook.me', Referer: 'https://www.ourstorybook.me/' },
       body: JSON.stringify({
         _subject: 'Новая заявка с сайта OUR STORY',
         _template: 'table',
@@ -26,7 +27,10 @@ module.exports = async (req, res) => {
       })
     });
     // HTTP 200 = accepted (first ever submission also triggers a one-time activation email)
-    res.status(200).json({ ok: r.ok, provider: await r.json().catch(() => ({})) });
+    const j = await r.json().catch(() => ({}));
+    const ok = r.ok && (j.success === 'true' || j.success === true ||
+                /activat/i.test(j.message || ''));
+    res.status(200).json({ ok, provider: j });
   } catch (e) {
     res.status(200).json({ ok: false, error: String(e) });
   }
