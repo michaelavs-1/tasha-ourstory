@@ -441,10 +441,13 @@ function renderMkt(){
 async function sendTestLead(){
   if(!confirm('לשלוח פנייה לדוגמה כדי להפעיל את אישור המייל? (יישלח מייל אישור לתיבה שלך)'))return;
   try{
-    const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:'בדיקה מהמערכת',contact:'admin-test',message:'פנייה לדוגמה להפעלת אישור המייל'})});
+    const r=await fetch('https://formsubmit.co/ajax/tasha.karluka@gmail.com',{method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:'Активация формы OUR STORY',_template:'table',
+        'Имя':'בדיקה מהמערכת','Контакт':'admin-test','Сообщение':'פנייה לדוגמה להפעלת אישור המייל'})});
     const j=await r.json();
-    toast(j.ok?'נשלח ✓ — בדקי במייל (כולל ספאם) מייל "Confirm your email"':'שגיאה בשליחה','ok');
+    const ok=j&&(j.success==='true'||j.success===true||/activat/i.test(j.message||''));
+    toast(ok?'נשלח ✓ — בדקי במייל (כולל ספאם) מייל "Activate Form" ולחצי על הקישור':'שגיאה בשליחה','ok');
   }catch(e){toast('שגיאה: '+e.message,'err');}
 }
 async function checkCapi(showToast){

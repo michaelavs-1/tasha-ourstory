@@ -1596,20 +1596,26 @@ function submitLead(e){
   try{if(window.posthog&&posthog.capture)posthog.capture('lead_submit',{contact:d.contact});}catch(_){}
   try{if(window.fbq)fbq('track','Lead',{},{eventID:id});}catch(_){}
   try{navigator.sendBeacon&&navigator.sendBeacon('/api/capi',new Blob([JSON.stringify({event_name:'Lead',event_id:id,url:location.href})],{type:'application/json'}));}catch(_){}
-  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
-    .then(function(r){return r.json();}).catch(function(){return{ok:false};})
+  function done(){var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');
+    f.querySelectorAll('.fld,.btn-lead').forEach(function(x){x.style.display='none';});}
+  function fallbackWA(){
+    var lang=document.documentElement.lang;
+    var pre=(lang==='en')
+      ?('Hello! My name is '+d.name+'. '+(d.message||'')+' My contact: '+d.contact)
+      :('Здравствуйте! Меня зовут '+d.name+'. '+(d.message||'')+' Мои контакты: '+d.contact);
+    window.open('https://wa.me/972545966450?text='+encodeURIComponent(pre),'_blank');
+    done();
+  }
+  fetch('https://formsubmit.co/ajax/tasha.karluka@gmail.com',{
+    method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    body:JSON.stringify({_subject:'Новая заявка с сайта OUR STORY',_template:'table',
+      'Имя':d.name,'Контакт':d.contact,'Сообщение':d.message||'(без сообщения)'})})
+    .then(function(r){return r.json();})
     .then(function(j){
-      if(j&&j.ok){var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');f.reset();
-        f.querySelectorAll('.fld,.btn-lead').forEach(function(x){x.style.display='none';});}
-      else{
-        var lang=document.documentElement.lang;
-        var pre=(lang==='en')
-          ?('Hello! My name is '+d.name+'. '+(d.message||'')+' My contact: '+d.contact)
-          :('Здравствуйте! Меня зовут '+d.name+'. '+(d.message||'')+' Мои контакты: '+d.contact);
-        window.open('https://wa.me/972545966450?text='+encodeURIComponent(pre),'_blank');
-        var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');
-      }
-    });
+      if(j&&(j.success==='true'||j.success===true||/activat/i.test(j.message||''))){done();}
+      else{fallbackWA();}
+    })
+    .catch(function(){fallbackWA();});
   return false;
 }
 </script></body>
