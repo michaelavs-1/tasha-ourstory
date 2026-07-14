@@ -122,9 +122,13 @@ export default async function handler(req, res) {
     langs: top(langs),
     topClicks: top(clicks, 15),
     pages: top(pages, 8),
-    lastEvents: events.slice(-40).reverse().map(e => ({
-      t: e.t, type: e.type, country: e.country, dev: e.dev,
-      text: e.text, section: e.section, dur: e.dur,
-    })),
+    // only the events that matter commercially — not every pageview/exit
+    lastEvents: events
+      .filter(e => e.type === 'whatsapp_click' || e.type === 'lead')
+      .slice(-25).reverse()
+      .map(e => ({
+        t: e.t, type: e.type, country: e.country, dev: e.dev,
+        text: e.text, section: e.section,
+      })),
   });
 }

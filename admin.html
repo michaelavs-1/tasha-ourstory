@@ -371,15 +371,15 @@ async function renderDash(){
         <div class="panel"><h3>מדינות</h3>${L(s.countries)}</div>
         <div class="panel"><h3>מכשירים</h3>${L(s.devices)}</div>
       </div>
-      <div class="panel"><h3>פעילות אחרונה (מה כל משתמש עשה)</h3>
+      <div class="panel"><h3>פניות ולידים</h3>
         ${(s.lastEvents||[]).length? '<div class="rowlist">'+s.lastEvents.map(e=>{
-          const names={pageview:'נכנס לאתר',click:'הקליק',whatsapp_click:'לחץ על WhatsApp',lead:'השאיר פרטים',session_end:'סיים ביקור'};
+          const names={whatsapp_click:'פנייה בוואטסאפ',lead:'השאיר פרטים בטופס'};
           const when=new Date(e.t).toLocaleString('he-IL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-          const what=(names[e.type]||e.type)+(e.text?' — "'+e.text+'"':'')+(e.type==='session_end'&&e.dur?' ('+fmtDur(e.dur)+')':'');
+          const what=(names[e.type]||e.type)+(e.text?' — "'+e.text+'"':'');
           return `<div class="row"><span class="name" title="${esc(what)}">${esc(what)}</span>
             <span class="meter" style="flex:0 0 auto;background:none"><small>${esc(e.country||'')} ${esc(e.dev||'')}</small></span>
             <span class="cnt" style="font-weight:400;opacity:.7">${when}</span></div>`;
-        }).join('')+'</div>' : '<div class="note">עדיין אין אירועים. היכנס לאתר ותוך כמה שניות זה יופיע כאן.</div>'}
+        }).join('')+'</div>' : '<div class="note">עדיין לא נכנסו פניות. כאן יופיע כל מי שלחץ על וואטסאפ או השאיר פרטים בטופס.</div>'}
       </div>`;
   }catch(err){
     body.innerHTML=`<div class="errbox">שגיאה במשיכת נתונים: ${esc(err.message)}</div>`;
