@@ -177,8 +177,8 @@ function fmtDur(sec){if(sec==null||isNaN(sec))return'—';sec=Math.round(sec);
   return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');}
 
 /* ═══════════ auth (password vault) ═══════════ */
-const VAULT={salt:'Cg5Sh2gEkGpPRw3Fzjb++g==',iv:'bJZNwhVIKFLkKteA',
-  ct:'4Sve/NZ7c9txnUqZIe/ZlLyF4/kXvIL2YrXAptE5f8/9YMSazZe9KchHTf6Z/o85TVU0icvxYeXNPiPCMtFS1cwueMT7UguodzKPTA2eCV4JUd6qEjPyW/JLnNroWx9eHDqbMhREqNrUVGLmTA=='};
+const VAULT={salt:'96X0yyte60cvy8rMkqIvOQ==',iv:'9IzZiK5MoHNJbuBC',
+  ct:'G4eoF/7Jjz8XJXCfNb3P2SAwiInek/XNpt7vXhEZ7n+EB6nCCWxZqEwreRVF+elEcoYl0voFR9RIKxFB6NEXvvhW35CFVffaklBeYuwy1UUrm0mdG5lp/6KMp6UKc+3GLWllZZQugMd7Gcf9qA=='};
 const b64b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function unlock(pw){
   const enc=new TextEncoder();
@@ -508,7 +508,7 @@ function renderSet(){
     </div>
     <div class="setup">
       <h3>מפתח GitHub</h3>
-      <div class="note">משמש לפרסום שינויים. תוקפו עד 11.7.2026 — כשפג, צור חדש ב-GitHub והדבק כאן.</div>
+      <div class="note">משמש לפרסום שינויים. תוקפו עד 12.10.2026 — כשפג, צור חדש ב-GitHub והדבק כאן.</div>
       <label>Token</label>
       <input id="setTok" type="password" placeholder="github_pat_...">
       <button class="btn btn-dark" onclick="saveTok()">עדכן מפתח</button>
