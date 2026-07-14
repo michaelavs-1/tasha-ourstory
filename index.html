@@ -1563,6 +1563,55 @@
   }
 })();
 </script><script id="ph-slot">/* POSTHOG_DISABLED */</script>
+<script>
+/* OUR STORY — self-hosted analytics (no third-party service) */
+(function(){
+  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,10);}
+  function get(k){try{return localStorage.getItem(k)||sessionStorage.getItem(k);}catch(e){return null;}}
+  function setL(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function setS(k,v){try{sessionStorage.setItem(k,v);}catch(e){}}
+
+  var vid=get('os_vid'); if(!vid){vid=uid(); setL('os_vid',vid);}
+  var sid=(function(){try{var s=sessionStorage.getItem('os_sid'); if(!s){s=uid(); sessionStorage.setItem('os_sid',s);} return s;}catch(e){return uid();}})();
+  window.__osVid=vid; window.__osSid=sid;
+
+  var start=Date.now();
+  var dev=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?'mobile':'desktop';
+
+  window.osTrack=function(type,extra){
+    var d=Object.assign({
+      type:type, sid:sid, vid:vid,
+      path:location.pathname, lang:document.documentElement.lang||'ru',
+      ref:document.referrer||'', utm:location.search||'',
+      dev:dev, scr:(screen.width+'x'+screen.height)
+    }, extra||{});
+    try{
+      var blob=new Blob([JSON.stringify(d)],{type:'application/json'});
+      if(navigator.sendBeacon && type!=='pageview'){ navigator.sendBeacon('/api/track',blob); return; }
+    }catch(e){}
+    try{ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d),keepalive:true}); }catch(e){}
+  };
+
+  osTrack('pageview');
+
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a,button'); if(!a) return;
+    var text=(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,80);
+    var href=a.getAttribute('href')||'';
+    var sec=(a.closest('section,nav,footer,div[id]')||{}).id||'';
+    osTrack('click',{text:text,href:href,section:sec});
+    if(/wa\.me/.test(href)) osTrack('whatsapp_click',{text:text,section:sec});
+  },true);
+
+  var sent=false;
+  function endSession(){
+    if(sent) return; sent=true;
+    osTrack('session_end',{dur:Math.round((Date.now()-start)/1000)});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') endSession(); });
+  window.addEventListener('pagehide',endSession);
+})();
+</script>
 <script id="pixel-slot">!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1337561697670059');fbq('track','PageView',{},{eventID:window.__pvId||undefined});</script>
 <script>
 (function(){
@@ -1577,10 +1626,8 @@
     var text=(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,80);
     var href=a.getAttribute('href')||'';
     var sec=(a.closest('section,nav,footer,div[id]')||{}).id||'';
-    if(window.posthog&&posthog.capture)posthog.capture('site_click',{text:text,href:href,section:sec});
     if(/wa\.me/.test(href)){
       var id=uid();
-      if(window.posthog&&posthog.capture)posthog.capture('whatsapp_click',{text:text,section:sec});
       if(window.fbq)fbq('track','Contact',{},{eventID:id});
       capi('Contact',id);
     }
@@ -1593,7 +1640,7 @@ function submitLead(e){
   var f=e.target, d={};
   new FormData(f).forEach(function(v,k){d[k]=v;});
   var id=(Date.now().toString(36)+Math.random().toString(36).slice(2,8));
-  try{if(window.posthog&&posthog.capture)posthog.capture('lead_submit',{contact:d.contact});}catch(_){}
+  try{if(window.osTrack)osTrack('lead',{text:(d.name||'').slice(0,40)});}catch(_){}
   try{if(window.fbq)fbq('track','Lead',{},{eventID:id});}catch(_){}
   try{navigator.sendBeacon&&navigator.sendBeacon('/api/capi',new Blob([JSON.stringify({event_name:'Lead',event_id:id,url:location.href})],{type:'application/json'}));}catch(_){}
   function done(){var ok=document.getElementById('leadOk');if(ok)ok.classList.add('show');

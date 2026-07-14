@@ -336,77 +336,69 @@ function listHTML(arr,opts={}){
 }
 async function renderDash(){
   const w=$('dashWrap');
-  const c=phConf();
-  if(!c.proj||!c.key){
-    w.innerHTML=`<div class="setup"><h3>📊 הפעלת מדידת נתונים</h3>
-      <div class="note">המערכת מודדת כניסות, מבקרים, הקלקות על כל כפתור, זמן שהייה, מדינות ומכשירים — באמצעות PostHog (חינמי עד מיליון אירועים בחודש, ללא צורך בבאנר עוגיות במצב הזה).</div>
-      <ol>
-        <li>צור חשבון חינמי: <a class="linkout" href="https://us.posthog.com/signup" target="_blank">us.posthog.com/signup</a> (בחר Web)</li>
-        <li>אחרי ההרשמה: Settings → Project → העתק את <b>Project API Key</b> (מתחיל ב-<code>phc_</code>) ואת <b>Project ID</b> (מספר)</li>
-        <li>צור מפתח קריאה: לחץ על האווטאר → Personal API Keys → Create (הרשאת <b>Query Read</b>) — מתחיל ב-<code>phx_</code></li>
-        <li>הדבק הכול בטאב <b>הגדרות</b> ולחץ "שמור והפעל מעקב"</li>
-      </ol>
-      <button class="btn btn-dark" onclick="document.querySelector('[data-v=setView]').click()">לעמוד ההגדרות ←</button></div>`;
-    return;
-  }
   w.innerHTML=`<div class="dash-head"><h2>📊 סטטיסטיקות האתר</h2>
     <div class="seg">${PERIODS.map(p=>`<button class="${p.d===period?'on':''}" onclick="period=${p.d};renderDash()">${p.l}</button>`).join('')}</div>
     <div class="spacer"></div>
-    <a class="linkout" style="font-size:.85rem" href="${phHost(c.region)}/project/${c.proj}" target="_blank">PostHog המלא ↗</a></div>
+    <button class="btn" onclick="renderDash()">רענן ↻</button></div>
     <div id="dashBody">טוען נתונים…</div>`;
-  const N=period, body=$('dashBody');
-  const since=`timestamp > now() - interval ${N} day`;
+  const body=$('dashBody');
   try{
-    const Q={
-      pv:`select count() from events where event='$pageview' and ${since}`,
-      vis:`select count(distinct distinct_id) from events where event='$pageview' and ${since}`,
-      clicks:`select count() from events where event='site_click' and ${since}`,
-      wa:`select count() from events where event='whatsapp_click' and ${since}`,
-      dur:`select avg(dateDiff('second',mn,mx)) from (select properties.$session_id as s, min(timestamp) as mn, max(timestamp) as mx from events where ${since} and properties.$session_id is not null group by s having dateDiff('second',mn,mx) between 1 and 7200)`,
-      daily:`select toDate(timestamp) as d, count() from events where event='$pageview' and ${since} group by d order by d`,
-      topClicks:`select properties.text as t, count() as c from events where event='site_click' and ${since} group by t order by c desc limit 10`,
-      countries:`select properties.$geoip_country_name as c, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by c order by n desc limit 8`,
-      devices:`select properties.$device_type as t, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by t order by n desc limit 5`,
-      langs:`select properties.$browser_language as l, count(distinct distinct_id) as n from events where event='$pageview' and ${since} group by l order by n desc limit 6`
-    };
-    const [pv,vis,clicks,wa,dur,daily,topClicks,countries,devices,langs]=await Promise.all([
-      phq(Q.pv),phq(Q.vis),phq(Q.clicks),phq(Q.wa),
-      phq(Q.dur).catch(()=>[[null]]),phq(Q.daily),
-      phq(Q.topClicks).catch(()=>[]),phq(Q.countries).catch(()=>[]),
-      phq(Q.devices).catch(()=>[]),phq(Q.langs).catch(()=>[])
-    ]);
-    const days={};(daily||[]).forEach(r=>{days[String(r[0])]=r[1];});
-    const dayKeys=[];const end=new Date();
-    for(let d=new Date(Date.now()-(N-1)*864e5);d<=end;d.setDate(d.getDate()+1))dayKeys.push(d.toISOString().slice(0,10));
-    const maxDay=Math.max(1,...dayKeys.map(k=>days[k]||0));
+    const r=await fetch('/api/stats?days='+period+'&_='+Date.now());
+    const s=await r.json();
+    if(!s.ok){
+      body.innerHTML=`<div class="errbox">המדידה עדיין לא פעילה (${esc(s.reason||'')}).<br>
+        צריך להוסיף ב-Vercel משתנה סביבה <code>GH_TOKEN</code> ואז Redeploy.</div>`;
+      return;
+    }
+    const t=s.totals;
+    const maxDay=Math.max(1,...s.daily.map(d=>d.views));
+    const L=arr=>listHTML((arr||[]).map(x=>[x.k,x.v]));
     body.innerHTML=`
       <div class="cards">
-        <div class="card"><div class="num">${(pv[0][0]||0).toLocaleString()}</div><div class="lbl">צפיות בעמוד</div></div>
-        <div class="card"><div class="num">${(vis[0][0]||0).toLocaleString()}</div><div class="lbl">מבקרים</div></div>
-        <div class="card"><div class="num">${fmtDur(dur[0]&&dur[0][0])}</div><div class="lbl">זמן שהייה ממוצע</div></div>
-        <div class="card"><div class="num">${(clicks[0][0]||0).toLocaleString()}</div><div class="lbl">הקלקות</div></div>
-        <div class="card"><div class="num">${(wa[0][0]||0).toLocaleString()}</div><div class="lbl">פניות WhatsApp</div></div>
+        <div class="card"><div class="num">${t.views.toLocaleString()}</div><div class="lbl">כניסות</div></div>
+        <div class="card"><div class="num">${t.visitors.toLocaleString()}</div><div class="lbl">מבקרים ייחודיים</div></div>
+        <div class="card"><div class="num">${fmtDur(t.avgDuration)}</div><div class="lbl">זמן שהייה ממוצע</div></div>
+        <div class="card"><div class="num">${t.clicks.toLocaleString()}</div><div class="lbl">הקלקות</div></div>
+        <div class="card"><div class="num">${t.whatsapp.toLocaleString()}</div><div class="lbl">פניות WhatsApp<br><small>${t.waRate}% מהכניסות</small></div></div>
+        <div class="card"><div class="num">${t.leads.toLocaleString()}</div><div class="lbl">לידים מהטופס<br><small>${t.leadRate}% מהכניסות</small></div></div>
       </div>
-      <div class="panel"><h3>צפיות לפי יום</h3>
-        <div class="chart">${dayKeys.map(k=>`<div class="bar" style="height:${Math.round((days[k]||0)/maxDay*100)}%"><span class="tip">${k.slice(5)}: ${days[k]||0}</span></div>`).join('')}</div>
+      <div class="panel"><h3>כניסות לפי יום</h3>
+        <div class="chart">${s.daily.map(d=>`<div class="bar" style="height:${Math.round(d.views/maxDay*100)}%"><span class="tip">${d.day.slice(5)}: ${d.views} כניסות · ${d.wa} וואטסאפ · ${d.leads} לידים</span></div>`).join('')}</div>
       </div>
       <div class="grid2">
-        <div class="panel"><h3>על מה מקליקים</h3>${listHTML(topClicks)}</div>
-        <div class="panel"><h3>מדינות</h3>${listHTML(countries)}</div>
-        <div class="panel"><h3>מכשירים</h3>${listHTML(devices)}</div>
-        <div class="panel"><h3>שפות דפדפן</h3>${listHTML(langs,{ltr:true})}</div>
+        <div class="panel"><h3>מאיפה הגיעו</h3>${L(s.sources)}</div>
+        <div class="panel"><h3>על מה הקליקו</h3>${L(s.topClicks)}</div>
+        <div class="panel"><h3>מדינות</h3>${L(s.countries)}</div>
+        <div class="panel"><h3>מכשירים</h3>${L(s.devices)}</div>
+      </div>
+      <div class="panel"><h3>פעילות אחרונה (מה כל משתמש עשה)</h3>
+        ${(s.lastEvents||[]).length? '<div class="rowlist">'+s.lastEvents.map(e=>{
+          const names={pageview:'נכנס לאתר',click:'הקליק',whatsapp_click:'לחץ על WhatsApp',lead:'השאיר פרטים',session_end:'סיים ביקור'};
+          const when=new Date(e.t).toLocaleString('he-IL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+          const what=(names[e.type]||e.type)+(e.text?' — "'+e.text+'"':'')+(e.type==='session_end'&&e.dur?' ('+fmtDur(e.dur)+')':'');
+          return `<div class="row"><span class="name" title="${esc(what)}">${esc(what)}</span>
+            <span class="meter" style="flex:0 0 auto;background:none"><small>${esc(e.country||'')} ${esc(e.dev||'')}</small></span>
+            <span class="cnt" style="font-weight:400;opacity:.7">${when}</span></div>`;
+        }).join('')+'</div>' : '<div class="note">עדיין אין אירועים. היכנס לאתר ותוך כמה שניות זה יופיע כאן.</div>'}
       </div>`;
   }catch(err){
-    body.innerHTML=`<div class="errbox">לא הצלחתי למשוך נתונים (${esc(err.message)}).<br>
-      בדוק שהמפתחות נכונים בטאב הגדרות, או צפה ישירות:
-      <a class="linkout" href="${phHost(c.region)}" target="_blank">PostHog ↗</a></div>`;
+    body.innerHTML=`<div class="errbox">שגיאה במשיכת נתונים: ${esc(err.message)}</div>`;
   }
 }
 
 /* ═══════════ marketing (Pixel + CAPI) ═══════════ */
 function renderMkt(){
   const w=$('mktWrap');
-  const pixel=localStorage.getItem(LS.pixel)||'';
+  let pixel=localStorage.getItem(LS.pixel)||'';
+  // detect the pixel directly from the live site, not from this browser's storage
+  fetch('/index.html?_='+Date.now()).then(r=>r.text()).then(t=>{
+    const m=t.match(/fbq\('init','(\d{10,20})'\)/);
+    const pill=document.getElementById('pixelPill');
+    if(m){ localStorage.setItem(LS.pixel,m[1]);
+      if(pill){pill.textContent='מוטמע באתר · '+m[1]; pill.classList.add('on');}
+      const inp=document.getElementById('pixelIn'); if(inp&&!inp.value)inp.value=m[1];
+    } else if(pill){ pill.textContent='לא מוטמע'; pill.classList.remove('on'); }
+  }).catch(()=>{});
   w.innerHTML=`
     <div class="dash-head"><h2>🎯 שיווק ומעקב פרסום</h2></div>
     <div class="setup">
